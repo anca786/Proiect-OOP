@@ -21,7 +21,7 @@ public:
     Medicament(const Medicament& other); 
 
     // Destructor
-    ~Medicament();
+    virtual ~Medicament();
 
     // Getteri
     int getId() const;
@@ -40,7 +40,7 @@ public:
     void setNecesitaReteta(bool necesitaReteta);
 
     // Alte metode
-    void afisare() const;
+    virtual void afisare() const;
     void adaugaStoc(int cantitate);
     bool scadeStoc(int cantitate);
 

@@ -27,6 +27,18 @@
     <ClCompile Include="Farmacie.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Antibiotic.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Probiotic.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Analgezic.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sirop.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Medicament.h">
@@ -39,6 +51,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Farmacie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Antibiotic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Probiotic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Analgezic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sirop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

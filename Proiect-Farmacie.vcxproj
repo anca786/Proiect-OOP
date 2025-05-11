@@ -127,15 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Analgezic.cpp" />
+    <ClCompile Include="Antibiotic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Farmacie.cpp" />
+    <ClCompile Include="Probiotic.cpp" />
+    <ClCompile Include="Sirop.cpp" />
     <ClCompile Include="Vanzare.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Analgezic.h" />
+    <ClInclude Include="Antibiotic.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Farmacie.h" />
+    <ClInclude Include="Probiotic.h" />
+    <ClInclude Include="Sirop.h" />
     <ClInclude Include="Vanzare.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
