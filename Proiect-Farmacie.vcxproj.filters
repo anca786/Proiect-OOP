@@ -39,6 +39,15 @@
     <ClCompile Include="Sirop.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reteta.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Angajat.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Medicament.h">
@@ -63,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sirop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reteta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Angajat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
