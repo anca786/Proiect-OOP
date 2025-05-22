@@ -71,19 +71,15 @@ void Reteta::adaugaMedicament(const std::string& numeMedicament, int cantitate) 
         std::cout << "Cantitatea trebuie s? fie pozitiv?!" << std::endl;
         return;
     }
-
-    // Verific?m dac? medicamentul exist? deja în re?et?
     auto it = std::find_if(medicamentePrescrise.begin(), medicamentePrescrise.end(),
         [&numeMedicament](const std::pair<std::string, int>& item) {
             return item.first == numeMedicament;
         });
 
     if (it != medicamentePrescrise.end()) {
-        // Dac? exist?, actualiz?m cantitatea
         it->second += cantitate;
     }
     else {
-        // Dac? nu exist?, ad?ug?m medicamentul nou
         medicamentePrescrise.push_back(std::make_pair(numeMedicament, cantitate));
     }
 }
@@ -104,7 +100,6 @@ void Reteta::stergeMedicament(const std::string& numeMedicament) {
 }
 
 bool Reteta::verificaValabilitate(const std::string& dataCurenta) const {
-    // Implementare simpl? - presupunem c? datele sunt în format "YYYY-MM-DD"
     return dataCurenta <= dataExpirare;
 }
 

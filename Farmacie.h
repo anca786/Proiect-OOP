@@ -1,18 +1,32 @@
 // Farmacie.h
+#include <iostream>  
 #ifndef FARMACIE_H
 #define FARMACIE_H
 
 #include "Medicament.h"
 #include "Client.h"
 #include "Vanzare.h"
+#include "Vanzabil.h"
 #include <vector>
 #include <string>
+
+struct Adresa {
+	std::string strada;
+	int numar;
+	std::string oras;
+	int codPostal;
+
+    Adresa() : strada(""), numar(0), oras(""), codPostal(0) {}
+    Adresa(const std::string& str, const int& nr, const std::string& oras, const int& cp)
+       : strada(str), numar(nr), oras(oras), codPostal(cp) {
+    }
+};
 
 class Farmacie {
 private:
     std::string nume;
-    std::string adresa;
-    std::vector<Medicament> stocMedicamente;
+    Adresa adresa;
+    std::vector<Medicament*> stocMedicamente;
     std::vector<Client> clienti;
     std::vector<Vanzare> vanzari;
     int nextIdMedicament;
@@ -22,7 +36,7 @@ private:
 public:
     // Constructori
     Farmacie();
-    Farmacie(const std::string& nume, const std::string& adresa);
+    Farmacie(const std::string& nume, const Adresa& adresa);
     Farmacie(const Farmacie& other);
 
     // Destructor
@@ -30,15 +44,16 @@ public:
 
     // Getteri
     std::string getNume() const;
-    std::string getAdresa() const;
+    Adresa getAdresa() const;
 
     // Setteri
     void setNume(const std::string& nume);
-    void setAdresa(const std::string& adresa);
+    void setAdresa(const Adresa& adresa);
 
     // Metode pentru gestiunea medicamentelor
-    void adaugaMedicament(const std::string& nume, const std::string& producator,
-        double pret, int cantitate, bool necesitaReteta);
+    /*void adaugaMedicament(const std::string& nume, const std::string& producator,
+        double pret, int cantitate, bool necesitaReteta,int tip);*/
+    void adaugaMedicament(Medicament* med);
     void actualizareMedicament(int id, const std::string& nume, const std::string& producator,
         double pret, int cantitate, bool necesitaReteta);
     void stergeMedicament(int id);
@@ -46,6 +61,10 @@ public:
     Medicament* cautaMedicamentDupaNume(const std::string& nume);
     void afisareMedicamente() const;
     void actualizeazaStoc(int id, int cantitate);
+    void afisareAnalgezice() const;
+    void afisareAntibiotice() const;
+    void afisareProbiotice() const;
+    void afisareSiropuri() const;
 
     // Metode pentru gestiunea clientilor
     void adaugaClient(const std::string& nume, const std::string& prenume,
@@ -73,7 +92,7 @@ public:
     void raportStoc() const;
     void raportVanzariPerioada(const std::string& dataInceput, const std::string& dataSfarsit) const;
     void raportVanzariClient(int idClient) const;
-    void raportTopMedicamente() const;
+    //void raportTopMedicamente() const;
 
     // Supraincarcare operatori
     Farmacie& operator=(const Farmacie& other);

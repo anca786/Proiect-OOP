@@ -16,9 +16,9 @@ private:
     std::string dataExpirare;
     std::string numeMedic;
     Client client;
-    std::vector<std::pair<std::string, int>> medicamentePrescrise; // nume medicament, cantitate
+    std::vector<std::pair<std::string, int>> medicamentePrescrise; 
     bool esteCompensata;
-    int procentCompensare; // 0-100%
+    int procentCompensare;
 
 public:
     // Constructori

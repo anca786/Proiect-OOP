@@ -22,6 +22,13 @@ void Antibiotic::afisare() const {
     Medicament::afisare();
     std::cout << " - Antibiotic: " << substanta_activa << ", " << concentratie << "mg" << std::endl;
 }
+
+Medicament* Antibiotic::clone() const {
+	return new Antibiotic(*this);
+}
+
+
+//Supraincarcare operatori
 Antibiotic& Antibiotic::operator=(const Antibiotic& other) {
 	if (this != &other) {
 		Medicament::operator=(other);

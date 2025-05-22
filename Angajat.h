@@ -64,7 +64,7 @@ public:
     // Alte metode
     void adaugaTura(const std::string& data, int oraInceput, int oraFinal);
     void stergeTura(const std::string& turaCod);
-    void calculeazaOreLucrateLuna(const std::string& luna); // format: "YYYY-MM"
+    void calculeazaOreLucrateLuna(const std::string& luna); 
     double calculeazaSalariuLunar(const std::string& luna) const;
     void afisare() const;
     std::string getTipAngajatString() const;
@@ -73,8 +73,6 @@ public:
     // Supraincarcare operatori
     Angajat& operator=(const Angajat& other);
     bool operator==(const Angajat& other) const;
-    friend std::ostream& operator<<(std::ostream& os, const Angajat& angajat);
-
 };
 
 #endif

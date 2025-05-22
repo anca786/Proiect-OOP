@@ -3,8 +3,9 @@
 #define MEDICAMENT_H
 
 #include <string>
+#include "Vanzabil.h"
 
-class Medicament {
+class Medicament : public Vanzabil {
 private:
     int id;
     std::string nume;
@@ -12,8 +13,11 @@ private:
     double pret;
     int cantitate;
     bool necesitaReteta;
+    static int totalMedicamenteCreate;
+    //int tip;
 
 public:
+
     // Constructori
     Medicament();
     Medicament(int id, const std::string& nume, const std::string& producator,
@@ -21,15 +25,16 @@ public:
     Medicament(const Medicament& other); 
 
     // Destructor
-    virtual ~Medicament();
+    virtual ~Medicament() override;
 
     // Getteri
     int getId() const;
-    std::string getNume() const;
-    std::string getProducator() const;
-    double getPret() const;
-    int getCantitate() const;
+    std::string getNume() const override;
+    std::string getProducator() const ;
+    double getPret() const override;
+    int getCantitate() const override;
     bool getNecesitaReteta() const;
+    static int getTotalMedicamenteCreate();
 
     // Setteri
     void setId(int id);
@@ -40,9 +45,12 @@ public:
     void setNecesitaReteta(bool necesitaReteta);
 
     // Alte metode
-    virtual void afisare() const;
-    void adaugaStoc(int cantitate);
-    bool scadeStoc(int cantitate);
+    virtual void afisare() const override;
+    virtual Medicament* clone() const = 0;
+    void adaugaCantitate(int cantitate) override; 
+    void scadeCantitate(int cantitate) override;
+    bool esteDisponibil(int cantitateSolicitata) const override;
+
 
     // Supraincarcare operatori
     Medicament& operator=(const Medicament& other);

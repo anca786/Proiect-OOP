@@ -1,4 +1,4 @@
-// Vanzare.cpp
+﻿// Vanzare.cpp
 #include "Vanzare.h"
 #include <iostream>
 #include <iomanip>
@@ -42,11 +42,7 @@ void Vanzare::adaugaItem(const Medicament& medicament, int cantitate) {
         std::cout << "Clientul nu poate cumpara acest medicament fara reteta!" << std::endl;
         return;
     }
-
-    ItemVanzare item;
-    item.medicament = medicament;
-    item.cantitate = cantitate;
-    item.pretTotal = medicament.getPret() * cantitate;
+    ItemVanzare item(&medicament, cantitate);
 
     items.push_back(item);
     calculeazaTotal();
@@ -80,7 +76,7 @@ void Vanzare::afisare() const {
     std::cout << "Medicamente:" << std::endl;
 
     for (size_t i = 0; i < items.size(); ++i) {
-        std::cout << i + 1 << ". " << items[i].medicament.getNume()
+        std::cout << i + 1 << ". " << items[i].medicament->getNume()
             << " x " << items[i].cantitate
             << " = " << items[i].pretTotal << " RON" << std::endl;
     }
@@ -103,7 +99,7 @@ void Vanzare::genereazaBon() const {
     std::cout << "--------------------------------------------------" << std::endl;
 
     for (const auto& item : items) {
-        std::cout << std::left << std::setw(30) << item.medicament.getNume()
+        std::cout << std::left << std::setw(30) << item.medicament->getNume()
             << std::right << std::setw(10) << item.cantitate
             << std::right << std::setw(10) << item.pretTotal << std::endl;
     }
@@ -135,4 +131,21 @@ Vanzare& Vanzare::operator=(const Vanzare& other) {
 
 bool Vanzare::operator==(const Vanzare& other) const {
     return id == other.id;
+}
+
+Vanzare& Vanzare::operator+(const ItemVanzare& item) {
+    if (item.cantitate <= 0 || item.medicament->getCantitate() < item.cantitate) {
+        std::cout << "Cantitate invalida sau stoc insuficient pentru adaugare prin operator!" << std::endl;
+        return *this;
+    }
+    if (item.medicament->getNecesitaReteta() && !client.getAreAsigurare()) {
+        std::cout << "Clientul nu poate cumpara acest medicament fara reteta prin operator!" << std::endl;
+        return *this;
+    }
+
+    ItemVanzare newItem = item;
+    newItem.pretTotal = item.medicament->getPret() * item.cantitate;
+    items.push_back(newItem);
+    calculeazaTotal();
+    return *this;
 }

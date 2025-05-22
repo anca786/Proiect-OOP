@@ -2,16 +2,10 @@
 #ifndef VANZARE_H
 #define VANZARE_H
 
-#include "Medicament.h"
 #include "Client.h"
+#include "ItemVanzare.h"
 #include <vector>
 #include <string>
-
-struct ItemVanzare {
-    Medicament medicament;
-    int cantitate;
-    double pretTotal;
-};
 
 class Vanzare {
 private:
@@ -55,6 +49,7 @@ public:
     // Supraincarcare operatori
     Vanzare& operator=(const Vanzare& other);
     bool operator==(const Vanzare& other) const;
+    Vanzare& operator+(const ItemVanzare& item);
 };
 
 #endif

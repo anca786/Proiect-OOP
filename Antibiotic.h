@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 // Antibiotic.h
 #ifndef ANTIBIOTIC_H
 #define ANTIBIOTIC_H
@@ -28,7 +28,7 @@ public:
 
 	//Alte metode
 	void afisare() const override;
-
+	Medicament* clone() const override;
 
 	// Supraincarcare operatori
 	Antibiotic& operator=(const Antibiotic& other);

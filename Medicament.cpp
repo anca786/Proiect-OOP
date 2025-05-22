@@ -1,18 +1,24 @@
-// Medicament.cpp
+﻿// Medicament.cpp
 #include "Medicament.h"
 #include <iostream>
 
+int Medicament::totalMedicamenteCreate = 0;
+
 // Constructori
-Medicament::Medicament() : id(0), nume(""), producator(""), pret(0.0), cantitate(0), necesitaReteta(false) {}
+Medicament::Medicament() : id(0), nume(""), producator(""), pret(0.0), cantitate(0), necesitaReteta(false) {
+    totalMedicamenteCreate++;
+}
 
 Medicament::Medicament(int id, const std::string& nume, const std::string& producator,
     double pret, int cantitate, bool necesitaReteta)
     : id(id), nume(nume), producator(producator), pret(pret), cantitate(cantitate), necesitaReteta(necesitaReteta) {
+	totalMedicamenteCreate++;  
 }
 
 Medicament::Medicament(const Medicament& other)
     : id(other.id), nume(other.nume), producator(other.producator),
     pret(other.pret), cantitate(other.cantitate), necesitaReteta(other.necesitaReteta) {
+	totalMedicamenteCreate++;
 }
 
 // Destructor
@@ -44,19 +50,26 @@ void Medicament::afisare() const {
     std::cout << "Necesita reteta: " << (necesitaReteta ? "Da" : "Nu") << std::endl;
 }
 
-void Medicament::adaugaStoc(int cantitate) {
+void Medicament::adaugaCantitate(int cantitate) { 
     if (cantitate > 0) {
         this->cantitate += cantitate;
     }
 }
 
-bool Medicament::scadeStoc(int cantitate) {
+void Medicament::scadeCantitate(int cantitate) { 
     if (cantitate > 0 && this->cantitate >= cantitate) {
         this->cantitate -= cantitate;
-        return true;
     }
-    return false;
 }
+
+bool Medicament::esteDisponibil(int cantitateSolicitata) const { 
+    return cantitateSolicitata > 0 && this->cantitate >= cantitateSolicitata;
+}
+
+int Medicament::getTotalMedicamenteCreate() {
+	return totalMedicamenteCreate;
+}
+
 
 // Supraincarcare operatori
 Medicament& Medicament::operator=(const Medicament& other) {

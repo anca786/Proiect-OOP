@@ -1,4 +1,4 @@
-// Analgezic.cpp
+﻿// Analgezic.cpp
 #include "Analgezic.h"
 #include <iostream>
 
@@ -21,6 +21,10 @@ void Analgezic::setTipDurere(const std::string& tip) { tip_durere = tip; }
 void Analgezic::afisare() const {
     Medicament::afisare();
     std::cout << " - Analgezic pentru: " << tip_durere << std::endl;
+}
+
+Medicament* Analgezic::clone() const {
+    return new Analgezic(*this); 
 }
 
 // Supraincarcare operatori

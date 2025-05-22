@@ -58,7 +58,6 @@ void Angajat::adaugaTura(const std::string& data, int oraInceput, int oraFinal) 
 
     std::string turaCod = data + ":" + std::to_string(oraInceput) + "-" + std::to_string(oraFinal);
 
-    // Verificăm dacă tura există deja
     auto it = std::find(tureLucrate.begin(), tureLucrate.end(), turaCod);
     if (it != tureLucrate.end()) {
         std::cout << "Această tură există deja în program!" << std::endl;
@@ -84,9 +83,7 @@ void Angajat::calculeazaOreLucrateLuna(const std::string& luna) {
     oreLucrateLuna = 0;
 
     for (const auto& tura : tureLucrate) {
-        // Verificăm dacă tura este din luna specificată
         if (tura.substr(0, 7) == luna) {
-            // Extragem orele din formatul "YYYY-MM-DD:HH-HH"
             size_t pos1 = tura.find(":");
             size_t pos2 = tura.find("-", pos1);
 
@@ -101,13 +98,10 @@ void Angajat::calculeazaOreLucrateLuna(const std::string& luna) {
 }
 
 double Angajat::calculeazaSalariuLunar(const std::string& luna) const {
-    // Presupunem un salariu de bază plus ore suplimentare
     int oreLucrate = 0;
 
     for (const auto& tura : tureLucrate) {
-        // Verificăm dacă tura este din luna specificată
         if (tura.substr(0, 7) == luna) {
-            // Extragem orele din formatul "YYYY-MM-DD:HH-HH"
             size_t pos1 = tura.find(":");
             size_t pos2 = tura.find("-", pos1);
 
@@ -120,12 +114,10 @@ double Angajat::calculeazaSalariuLunar(const std::string& luna) const {
         }
     }
 
-    // Presupunem 160 de ore standard pe lună
     const int oreStandard = 160;
     double salariuLunar = salariu;
 
     if (oreLucrate > oreStandard) {
-        // Ore suplimentare plătite cu 150%
         double tarifOrar = salariu / oreStandard;
         salariuLunar += (oreLucrate - oreStandard) * tarifOrar * 1.5;
     }
@@ -151,7 +143,6 @@ std::string Angajat::getTipAngajatString() const {
 }
 
 bool Angajat::poateEliberaReteta() const {
-    // Doar farmaciștii și asistenții farmaciști pot elibera rețete
     return tip == TipAngajat::FARMACIST || tip == TipAngajat::ASISTENT_FARMACIST;
 }
 
@@ -189,13 +180,13 @@ bool Angajat::operator==(const Angajat& other) const {
 
 std::ostream& operator<<(std::ostream& os, const Angajat& angajat)
 {
-    os << "ID: " << angajat.id << "\n";
-    os << "Nume: " << angajat.nume << " " << angajat.prenume << "\n";
-    os << "CNP: " << angajat.cnp << "\n";
-    os << "Data angajare: " << angajat.dataAngajare << "\n";
-    os << "Salariu: " << angajat.salariu << " RON\n";
+    os << "ID: " << angajat.getId() << "\n";
+    os << "Nume: " << angajat.getNume() << " " << angajat.getPrenume() << "\n";
+    os << "CNP: " << angajat.getCnp() << "\n";
+    os << "Data angajare: " << angajat.getDataAngajare() << "\n";
+    os << "Salariu: " << angajat.getSalariu() << " RON\n";
     os << "Tip angajat: " << angajat.getTipAngajatString() << "\n";
-    os << "Status: " << (angajat.esteActiv ? "Activ" : "Inactiv") << "\n";
-    os << "Ore lucrate luna curentă: " << angajat.oreLucrateLuna << "\n";
+    os << "Status: " << (angajat.getEsteActiv() ? "Activ" : "Inactiv") << "\n";
+    os << "Ore lucrate luna curentă: " << angajat.getOreLucrateLuna() << "\n";
     return os;
 }

@@ -23,6 +23,11 @@ void Sirop::afisare() const {
     std::cout << " - Sirop: Volum " << volum << "ml" << std::endl;
 }
 
+Medicament* Sirop::clone() const {
+    return new Sirop(*this);
+}
+
+
 // Supraincarcare operatori
 bool Sirop::operator==(const Sirop& other) const {
     return Medicament::operator==(other) && volum == other.volum;

@@ -8,7 +8,7 @@
 
 class Sirop : public Medicament {
 private:
-    double volum; // in ml
+    double volum;
 
 public:
     // Constructori
@@ -26,6 +26,7 @@ public:
 
     // Alte metode
     void afisare() const override;
+    Medicament* clone() const override;
 
     // Supraincarcare operatori
     bool operator==(const Sirop& other) const;

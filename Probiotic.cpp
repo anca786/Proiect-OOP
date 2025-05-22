@@ -1,4 +1,4 @@
-// Probiotic.cpp
+﻿// Probiotic.cpp
 #include "Probiotic.h"
 #include <iostream>
 
@@ -21,6 +21,10 @@ void Probiotic::setRefrigerareNecesara(bool refrigerare) { refrigerare_necesara 
 void Probiotic::afisare() const {
     Medicament::afisare();
     std::cout << " - Probiotic: " << (refrigerare_necesara ? "Necesita refrigerare" : "Nu necesita refrigerare") << std::endl;
+}
+
+Medicament* Probiotic::clone() const {
+    return new Probiotic(*this); 
 }
 
 // Supraincarcare operatori
