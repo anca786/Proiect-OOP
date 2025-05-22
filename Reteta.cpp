@@ -68,7 +68,7 @@ void Reteta::setProcentCompensare(int procentCompensare) {
 // Alte metode
 void Reteta::adaugaMedicament(const std::string& numeMedicament, int cantitate) {
     if (cantitate <= 0) {
-        std::cout << "Cantitatea trebuie s? fie pozitiv?!" << std::endl;
+        std::cout << "Cantitatea trebuie sa fie pozitiva!" << std::endl;
         return;
     }
     auto it = std::find_if(medicamentePrescrise.begin(), medicamentePrescrise.end(),
@@ -92,10 +92,10 @@ void Reteta::stergeMedicament(const std::string& numeMedicament) {
 
     if (it != medicamentePrescrise.end()) {
         medicamentePrescrise.erase(it);
-        std::cout << "Medicamentul a fost ?ters din re?et?!" << std::endl;
+        std::cout << "Medicamentul a fost sters din reteta!" << std::endl;
     }
     else {
-        std::cout << "Medicamentul nu exist? în re?et?!" << std::endl;
+        std::cout << "Medicamentul nu exista în reteta!" << std::endl;
     }
 }
 
@@ -104,8 +104,8 @@ bool Reteta::verificaValabilitate(const std::string& dataCurenta) const {
 }
 
 void Reteta::afisare() const {
-    std::cout << "ID Re?et?: " << id << std::endl;
-    std::cout << "Num?r re?et?: " << numarReteta << std::endl;
+    std::cout << "ID Reteta: " << id << std::endl;
+    std::cout << "Numar reteta: " << numarReteta << std::endl;
     std::cout << "Data emitere: " << dataEmitere << std::endl;
     std::cout << "Data expirare: " << dataExpirare << std::endl;
     std::cout << "Medic prescriptor: " << numeMedic << std::endl;

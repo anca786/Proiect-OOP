@@ -2,6 +2,7 @@
 #include "Farmacie.h"
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 #include <map>
 #include "Analgezic.h"
 #include "Antibiotic.h"
@@ -268,6 +269,7 @@ Vanzare Farmacie::creeazaVanzare(int idClient, const std::string& data) {
 	if (client) {
 		Vanzare vanzare(nextIdVanzare++, data, *client);
 		vanzari.push_back(vanzare);
+		std::cout << "Vanzare noua creata cu ID: " << vanzare.getId() << std::endl;
 		return vanzare;
 	}
 	else {
@@ -275,19 +277,16 @@ Vanzare Farmacie::creeazaVanzare(int idClient, const std::string& data) {
 		return Vanzare();
 	}
 }
+
 Vanzare* Farmacie::cautaVanzare(int id) {
-	auto it = std::find_if(vanzari.begin(), vanzari.end(),
-		[id](const Vanzare& v) { return v.getId() == id; });
-	if (it != vanzari.end()) {
-		return &(*it);
+	for (auto& vanzare : vanzari) {
+		if (vanzare.getId() == id) {
+			return &vanzare;
+		}
 	}
 	return nullptr;
 }
-void Farmacie::adaugaVanzare(const Client& client) {
-	Vanzare vanzare(nextIdVanzare++, "2023-10-01", client);
-	vanzari.push_back(vanzare);
-	std::cout << "Vanzare adaugata cu succes!" << std::endl;
-}
+
 void Farmacie::actualizeazaVanzare(int id, const Client& client) {
 	Vanzare* vanzare = cautaVanzare(id);
 	if (vanzare) {
@@ -328,10 +327,14 @@ void Farmacie::afisareVanzare(int idVanzare) {
 }
 void Farmacie::adaugaItemLaVanzare(int idVanzare, int idMedicament, int cantitate) {
 	Vanzare* vanzare = cautaVanzare(idVanzare);
+	if (!vanzare) {
+		std::cout << "Eroare: Vanzarea cu ID-ul " << idVanzare << " nu a fost gasita.\n";
+		return;
+	}
 	Medicament* medicament = cautaMedicament(idMedicament);
 	if (vanzare && medicament) {
+
 		vanzare->adaugaItem(*medicament, cantitate);
-		std::cout << "Item adaugat la vanzare cu succes!" << std::endl;
 	}
 	else {
 		if (!vanzare) {
@@ -364,7 +367,7 @@ void Farmacie::finalizeazaVanzare(int idVanzare) {
 }
 
 void Farmacie::raportStoc() const {
-	std::cout << "Raport stoc medicamente:" << std::endl;
+	std::cout << "--- Raport stoc medicamente ---" << std::endl;
 	std::cout << "----------------------------------------" << std::endl;
 	for (const auto& medicament : stocMedicamente) {
 		medicament->afisare();
@@ -372,7 +375,7 @@ void Farmacie::raportStoc() const {
 	}
 }
 void Farmacie::raportVanzariPerioada(const std::string& dataInceput, const std::string& dataSfarsit) const {
-	std::cout << "Raport vanzari perioada " << dataInceput << " - " << dataSfarsit << ":" << std::endl;
+	std::cout << "--- Raport vanzari perioada " << dataInceput << " - " << dataSfarsit << " ---" << std::endl;
 	std::cout << "----------------------------------------" << std::endl;
 	for (const auto& vanzare : vanzari) {
 		if (vanzare.getData() >= dataInceput && vanzare.getData() <= dataSfarsit) {
@@ -382,7 +385,7 @@ void Farmacie::raportVanzariPerioada(const std::string& dataInceput, const std::
 	}
 }
 void Farmacie::raportVanzariClient(int idClient) const {
-	std::cout << "Raport vanzari pentru clientul cu ID-ul " << idClient << ":" << std::endl;
+	std::cout << "--- Raport vanzari pentru clientul cu ID-ul " << idClient << " ---" << std::endl;
 	std::cout << "----------------------------------------" << std::endl;
 	for (const auto& vanzare : vanzari) {
 		if (vanzare.getClient().getId() == idClient) {
@@ -391,13 +394,13 @@ void Farmacie::raportVanzariClient(int idClient) const {
 		}
 	}
 }
-/*void Farmacie::raportTopMedicamente() const {
-	std::cout << "Raport top medicamente:" << std::endl;
+void Farmacie::raportTopMedicamente() const {
+	std::cout << std::endl << "--- Raport top medicamente ---" << std::endl;
 	std::cout << "----------------------------------------" << std::endl;
 	std::map<std::string, int> medicamenteVandute;
 	for (const auto& vanzare : vanzari) {
 		for (const auto& item : vanzare.getItems()) {
-			medicamenteVandute[item.medicament.getNume()] += item.cantitate;
+			medicamenteVandute[item.medicament->getNume()] += item.cantitate;
 		}
 	}
 	std::vector<std::pair<std::string, int>> topMedicamente(medicamenteVandute.begin(), medicamenteVandute.end());
@@ -408,7 +411,19 @@ void Farmacie::raportVanzariClient(int idClient) const {
 	for (const auto& medicament : topMedicamente) {
 		std::cout << "Medicament: " << medicament.first << ", Cantitate vanduta: " << medicament.second << std::endl;
 	}
-}*/
+	if (topMedicamente.empty()) {
+		std::cout << std::endl;
+	}
+	else {
+		std::cout << std::left << std::setw(30) << "Medicament"
+			<< std::right << std::setw(20) << "Cantitate Vanduta\n";
+		std::cout << "--------------------------------------------------\n";
+		for (const auto& medicament : topMedicamente) {
+			std::cout << std::left << std::setw(30) << medicament.first
+				<< std::right << std::setw(20) << medicament.second << std::endl;
+		}
+	}
+}
 
 // Supraincarcare operatori
 Farmacie& Farmacie::operator=(const Farmacie& other) {

@@ -79,7 +79,6 @@ public:
     // Metode pentru gestiunea vanzarilor
     Vanzare creeazaVanzare(int idClient, const std::string& data);
     void stergeVanzare(int id);
-    void adaugaVanzare(const Client& client);
     void actualizeazaVanzare(int id, const Client& client);
 	Vanzare* cautaVanzare(int id);
     void adaugaItemLaVanzare(int idVanzare, int idMedicament, int cantitate);
@@ -92,7 +91,7 @@ public:
     void raportStoc() const;
     void raportVanzariPerioada(const std::string& dataInceput, const std::string& dataSfarsit) const;
     void raportVanzariClient(int idClient) const;
-    //void raportTopMedicamente() const;
+    void raportTopMedicamente() const;
 
     // Supraincarcare operatori
     Farmacie& operator=(const Farmacie& other);

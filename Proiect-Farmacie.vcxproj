@@ -136,7 +136,6 @@
     <ClCompile Include="Medicament.cpp" />
     <ClCompile Include="Farmacie.cpp" />
     <ClCompile Include="Probiotic.cpp" />
-    <ClCompile Include="Reteta.cpp" />
     <ClCompile Include="Sirop.cpp" />
     <ClCompile Include="Vanzare.cpp" />
   </ItemGroup>
@@ -149,7 +148,6 @@
     <ClInclude Include="Medicament.h" />
     <ClInclude Include="Farmacie.h" />
     <ClInclude Include="Probiotic.h" />
-    <ClInclude Include="Reteta.h" />
     <ClInclude Include="Sirop.h" />
     <ClInclude Include="Vanzabil.h" />
     <ClInclude Include="Vanzare.h" />

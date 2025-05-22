@@ -35,6 +35,7 @@ int main()
 		std::cout << "1. Gestionare Medicamente" << std::endl;
 		std::cout << "2. Gestionare Clienti" << std::endl;
 		std::cout << "3. Gestionare Vanzari" << std::endl;
+		std::cout << "4. Rapoarte" << std::endl;
 		std::cout << "0. Iesire" << std::endl;
 		std::cout << "Introduceti optiunea: ";
 		std::cin >> opt;
@@ -313,6 +314,178 @@ int main()
 					std::cout << "Introduceti ID-ul clientului de sters: ";
 					std::cin >> id;
 					farmacie.stergeClient(id);
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+			}
+
+		}
+		else if (opt == 3)
+		{
+			while (true)
+			{
+				std::cout << std::endl << "--- Gestionare Vanzari ---" << std::endl;
+				std::cout << "1. Creeaza vanzare noua" << std::endl;
+				std::cout << "2. Adaugare medicament la vanzare" << std::endl;
+				std::cout << "3. Stergere medicament din vanzare" << std::endl;
+				std::cout << "4. Finalizeaza vanzare" << std::endl;
+				std::cout << "5. Afiseaza toate vanzarile" << std::endl;
+				std::cout << "6. Cauta vanzare dupa id" << std::endl;
+				std::cout << "7. Generare bon pentru vanzare" << std::endl;
+				std::cout << "0. Meniu principal" << std::endl;
+				std::cout << "Introduceti optiunea: ";
+				int optiune;
+				std::cin >> optiune;
+				std::cout << std::endl;
+				std::cin.ignore();
+				if (optiune == 0)
+					break;
+				else if (optiune == 1)
+				{
+					int idClient;
+					std::string dataVanzare;
+					std::cout << "Introduceti ID-ul clientului: ";
+					std::cin >> idClient;
+					std::cin.ignore();
+					std::cout << "Introduceti data vanzarii (YYYY-MM-DD): ";
+					std::cin >> dataVanzare;
+
+					Client* client = farmacie.cautaClient(idClient);
+					if (client) {
+						Vanzare vanzareNoua = farmacie.creeazaVanzare(idClient, dataVanzare);
+						std::cout << "Vanzare cu ID-ul " << vanzareNoua.getId() << " creata cu succes.\n";
+					}
+					else {
+						std::cout << "Clientul cu ID-ul " << idClient << " nu a fost gasit.\n";
+					}
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 2)
+				{
+					int idVanzare, idMedicament, cantitate;
+					std::cout << "Introduceti ID-ul vanzarii: ";
+					std::cin >> idVanzare;
+					std::cout << "Introduceti ID-ul medicamentului: ";
+					std::cin >> idMedicament;
+					std::cout << "Introduceti cantitatea: ";
+					std::cin >> cantitate;
+					farmacie.adaugaItemLaVanzare(idVanzare, idMedicament, cantitate);
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 3)
+				{
+					int idVanzare, indexItem;
+					std::cout << "Introduceti ID-ul vanzarii: ";
+					std::cin >> idVanzare;
+					std::cout << "Introduceti indexul produsului de sters: ";
+					std::cin >> indexItem;
+					farmacie.stergeItemDinVanzare(idVanzare, indexItem);
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 4)
+				{
+					int idVanzare;
+					std::cout << "Introduceti ID-ul vanzarii de finalizat: ";
+					std::cin >> idVanzare;
+					farmacie.finalizeazaVanzare(idVanzare);
+					std::cout << "Vanzare finalizata cu succes.\n";
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 5)
+				{
+					farmacie.afisareVanzari();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 6)
+				{
+					int idVanzare;
+					std::cout << "Introduceti ID-ul vanzarii de cautat: ";
+					std::cin >> idVanzare;
+					Vanzare* vanzare = farmacie.cautaVanzare(idVanzare);
+					if (vanzare) {
+						vanzare->afisare();
+					}
+					else {
+						std::cout << "Vanzarea cu ID-ul " << idVanzare << " nu a fost gasita.\n";
+					}
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 7)
+				{
+					int idVanzare;
+					std::cout << "Introduceti ID-ul vanzarii pentru care doriti bonul: ";
+					std::cin >> idVanzare;
+					Vanzare* vanzare = farmacie.cautaVanzare(idVanzare);
+					if (vanzare) {
+						vanzare->genereazaBon();
+					}
+					else {
+						std::cout << "Vanzarea cu ID-ul " << idVanzare << " nu a fost gasita.\n";
+					}
+
+				}
+			}
+		}
+		else if (opt == 4)
+		{
+			while (true)
+			{
+				int optiune;
+				std::cout << "\n--- Meniu Rapoarte ---\n";
+				std::cout << "1. Raport Stoc Medicamente\n";
+				std::cout << "2. Raport Vanzari pe Perioada\n";
+				std::cout << "3. Raport Vanzari Client\n";
+				std::cout << "4. Raport Top Medicamente Vandute\n"; 
+				std::cout << "0. Inapoi la Meniul Principal\n";
+				std::cout << "Introduceti optiunea : ";
+				std::cin >> optiune;
+				if (optiune == 0)
+					break;
+				else if (optiune == 1)
+				{
+					farmacie.raportStoc();
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 2)
+				{
+					std::string dataInceput;
+					std::string dataSfarsit;
+					std::cout << "Introduceti data de inceput (YYYY-MM-DD): ";
+					std::cin >> dataInceput;
+					std::cout << "Introduceti data de sfarsit (YYYY-MM-DD): ";
+					std::cin >> dataSfarsit;
+					farmacie.raportVanzariPerioada(dataInceput, dataSfarsit);
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 3)
+				{
+					int idClient;
+					std::cout << "Introduceti ID-ul clientului: ";
+					std::cin >> idClient;
+					farmacie.raportVanzariClient(idClient);
+					std::cin.get();
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
+				}
+				else if (optiune == 4)
+				{
+					farmacie.raportTopMedicamente();
 					std::cin.get();
 					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
 					std::cin.get();
