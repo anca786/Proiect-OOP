@@ -1,37 +1,37 @@
-// Farmacie.h
+// farmacie.h
 #include <iostream>  
 #ifndef FARMACIE_H
 #define FARMACIE_H
 
-#include "Medicament.h"
-#include "Client.h"
-#include "Vanzare.h"
-#include "Vanzabil.h"
+#include "medicament.h"
+#include "client.h"
+#include "vanzare.h"
+#include "vanzabil.h"
 #include <vector>
 #include <string>
 
 struct Adresa {
-	std::string strada;
-	int numar;
-	std::string oras;
-	int codPostal;
+    std::string strada;
+    int numar;
+    std::string oras;
+    int cod_postal;
 
-    Adresa() : strada(""), numar(0), oras(""), codPostal(0) {}
+    Adresa() : strada(""), numar(0), oras(""), cod_postal(0) {}
     Adresa(const std::string& str, const int& nr, const std::string& oras, const int& cp)
-       : strada(str), numar(nr), oras(oras), codPostal(cp) {
+        : strada(str), numar(nr), oras(oras), cod_postal(cp) {
     }
 };
 
 class Farmacie {
 private:
-    std::string nume;
-    Adresa adresa;
-    std::vector<Medicament*> stocMedicamente;
-    std::vector<Client> clienti;
-    std::vector<Vanzare> vanzari;
-    int nextIdMedicament;
-    int nextIdClient;
-    int nextIdVanzare;
+    std::string m_nume;
+    Adresa m_adresa;
+    std::vector<Medicament*> m_stoc_medicamente;
+    std::vector<Client> m_clienti;
+    std::vector<Vanzare> m_vanzari;
+    int m_next_id_medicament;
+    int m_next_id_client;
+    int m_next_id_vanzare;
 
 public:
     // Constructori
@@ -43,58 +43,56 @@ public:
     ~Farmacie();
 
     // Getteri
-    std::string getNume() const;
-    Adresa getAdresa() const;
+    std::string GetNume() const;
+    Adresa GetAdresa() const;
 
     // Setteri
-    void setNume(const std::string& nume);
-    void setAdresa(const Adresa& adresa);
+    void SetNume(const std::string& nume);
+    void SetAdresa(const Adresa& adresa);
 
     // Metode pentru gestiunea medicamentelor
-    /*void adaugaMedicament(const std::string& nume, const std::string& producator,
-        double pret, int cantitate, bool necesitaReteta,int tip);*/
-    void adaugaMedicament(Medicament* med);
-    void actualizareMedicament(int id, const std::string& nume, const std::string& producator,
-        double pret, int cantitate, bool necesitaReteta);
-    void stergeMedicament(int id);
-    Medicament* cautaMedicament(int id);
-    Medicament* cautaMedicamentDupaNume(const std::string& nume);
-    void afisareMedicamente() const;
-    void actualizeazaStoc(int id, int cantitate);
-    void afisareAnalgezice() const;
-    void afisareAntibiotice() const;
-    void afisareProbiotice() const;
-    void afisareSiropuri() const;
+    void AdaugaMedicament(Medicament* med);
+    void ActualizareMedicament(int id, const std::string& nume, const std::string& producator,
+        double pret, int cantitate, bool necesita_reteta);
+    void StergeMedicament(int id);
+    Medicament* CautaMedicament(int id);
+    Medicament* CautaMedicamentDupaNume(const std::string& nume);
+    void AfisareMedicamente() const;
+    void ActualizeazaStoc(int id, int cantitate);
+    void AfisareAnalgezice() const;
+    void AfisareAntibiotice() const;
+    void AfisareProbiotice() const;
+    void AfisareSiropuri() const;
 
     // Metode pentru gestiunea clientilor
-    void adaugaClient(const std::string& nume, const std::string& prenume,
-        const std::string& cnp, bool areAsigurare);
-    void actualizeazaClient(int id, const std::string& nume, const std::string& prenume,
-        const std::string& cnp, bool areAsigurare);
-    void stergeClient(int id);
-    Client* cautaClient(int id);
-    Client* cautaClientDupaCnp(const std::string& cnp);
-    void afisareClienti() const;
+    void AdaugaClient(const std::string& nume, const std::string& prenume,
+        const std::string& cnp, bool are_asigurare);
+    void ActualizeazaClient(int id, const std::string& nume, const std::string& prenume,
+        const std::string& cnp, bool are_asigurare);
+    void StergeClient(int id);
+    Client* CautaClient(int id);
+    Client* CautaClientDupaCnp(const std::string& cnp);
+    void AfisareClienti() const;
 
     // Metode pentru gestiunea vanzarilor
-    Vanzare creeazaVanzare(int idClient, const std::string& data);
-    void stergeVanzare(int id);
-    void actualizeazaVanzare(int id, const Client& client);
-	Vanzare* cautaVanzare(int id);
-    void adaugaItemLaVanzare(int idVanzare, int idMedicament, int cantitate);
-    void stergeItemDinVanzare(int idVanzare, int indexItem);
-    void finalizeazaVanzare(int idVanzare);
-    void afisareVanzari() const;
-    void afisareVanzare(int idVanzare);
+    Vanzare CreeazaVanzare(int id_client, const std::string& data);
+    void StergeVanzare(int id);
+    void ActualizeazaVanzare(int id, const Client& client);
+    Vanzare* CautaVanzare(int id);
+    void AdaugaItemLaVanzare(int id_vanzare, int id_medicament, int cantitate);
+    void StergeItemDinVanzare(int id_vanzare, int index_item);
+    void FinalizeazaVanzare(int id_vanzare);
+    void AfisareVanzari() const;
+    void AfisareVanzare(int id_vanzare);
 
     // Metode pentru rapoarte
-    void raportStoc() const;
-    void raportVanzariPerioada(const std::string& dataInceput, const std::string& dataSfarsit) const;
-    void raportVanzariClient(int idClient) const;
-    void raportTopMedicamente() const;
+    void RaportStoc() const;
+    void RaportVanzariPerioada(const std::string& data_inceput, const std::string& data_sfarsit) const;
+    void RaportVanzariClient(int id_client) const;
+    void RaportTopMedicamente() const;
 
     // Supraincarcare operatori
     Farmacie& operator=(const Farmacie& other);
 };
 
-#endif 
+#endif

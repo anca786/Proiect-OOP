@@ -1,5 +1,5 @@
 #pragma once
-// ItemVanzare.h
+// item_vanzare.h
 #ifndef ITEM_H
 #define ITEM_H
 
@@ -8,19 +8,19 @@
 
 class ItemVanzare {
 public:
-    Medicament* medicament; 
+    Medicament* medicament;
     int cantitate;
-    double pretTotal;
+    double pret_total;
 
     // Constructori
-    ItemVanzare(); 
-    ItemVanzare(const Medicament* med_ptr, int qty); 
+    ItemVanzare();
+    ItemVanzare(const Medicament* med_ptr, int qty);
 
     ItemVanzare(const ItemVanzare& other);
-    ItemVanzare& operator=(const ItemVanzare& other); 
+    ItemVanzare& operator=(const ItemVanzare& other);
 
     // Destructor
-    ~ItemVanzare(); 
+    ~ItemVanzare();
 };
 
 #endif

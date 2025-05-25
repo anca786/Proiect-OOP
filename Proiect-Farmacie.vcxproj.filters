@@ -15,72 +15,72 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Medicament.cpp">
+    <ClCompile Include="medicament.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Client.cpp">
+    <ClCompile Include="client.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vanzare.cpp">
+    <ClCompile Include="vanzare.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Farmacie.cpp">
+    <ClCompile Include="farmacie.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Antibiotic.cpp">
+    <ClCompile Include="antibiotic.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Probiotic.cpp">
+    <ClCompile Include="probiotic.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Analgezic.cpp">
+    <ClCompile Include="analgezic.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sirop.cpp">
+    <ClCompile Include="sirop.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Angajat.cpp">
+    <ClCompile Include="angajat.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="ItemVanzare.cpp">
+    <ClCompile Include="item_vanzare.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Medicament.h">
+    <ClInclude Include="medicament.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Client.h">
+    <ClInclude Include="client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vanzare.h">
+    <ClInclude Include="vanzare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Farmacie.h">
+    <ClInclude Include="farmacie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Antibiotic.h">
+    <ClInclude Include="antibiotic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Probiotic.h">
+    <ClInclude Include="probiotic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Analgezic.h">
+    <ClInclude Include="analgezic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sirop.h">
+    <ClInclude Include="sirop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Angajat.h">
+    <ClInclude Include="angajat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vanzabil.h">
+    <ClInclude Include="vanzabil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ItemVanzare.h">
+    <ClInclude Include="item_vanzare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

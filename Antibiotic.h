@@ -1,34 +1,35 @@
- #pragma once
-// Antibiotic.h
+#pragma once
+// antibiotic.h
 #ifndef ANTIBIOTIC_H
 #define ANTIBIOTIC_H
 
-#include "Medicament.h"
+#include "medicament.h"
 
 class Antibiotic : public Medicament {
-	int concentratie;
-	std::string substanta_activa;
+private:
+	int m_concentratie;
+	std::string m_substanta_activa;
 public:
 	//constructori
-	Antibiotic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesitaReteta,
+	Antibiotic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesita_reteta,
 		int concentratie, const std::string& substanta_activa);
 
 	//Destructor
-	~Antibiotic() override=default;
+	~Antibiotic() override = default;
 
-	
+
 	//Getteri
-	int getConcentratie() const;
-	std::string getSubstantaActiva() const;
+	int GetConcentratie() const;
+	std::string GetSubstantaActiva() const;
 
 	//Setteri
-	void setConcentratie(int concentratie);
-	void setSubstantaActiva(const std::string& substanta_activa);
+	void SetConcentratie(int concentratie);
+	void SetSubstantaActiva(const std::string& substanta_activa);
 
 
 	//Alte metode
-	void afisare() const override;
-	Medicament* clone() const override;
+	void Afisare() const override;
+	Medicament* Clone() const override;
 
 	// Supraincarcare operatori
 	Antibiotic& operator=(const Antibiotic& other);

@@ -1,5 +1,5 @@
-#pragma once
-// Angajat.h
+﻿#pragma once
+// angajat.h
 #ifndef ANGAJAT_H
 #define ANGAJAT_H
 
@@ -7,7 +7,7 @@
 #include <vector>
 #include<iostream>
 
-enum class TipAngajat {
+enum class Tip_Angajat {
     FARMACIST,
     ASISTENT_FARMACIST,
     CASIER,
@@ -17,58 +17,58 @@ enum class TipAngajat {
 
 class Angajat {
 private:
-    int id;
-    std::string nume;
-    std::string prenume;
-    std::string cnp;
-    std::string dataAngajare;
-    double salariu;
-    TipAngajat tip;
-    bool esteActiv;
-    int oreLucrateLuna;
-    std::vector<std::string> tureLucrate; 
+    int m_id;
+    std::string m_nume;
+    std::string m_prenume;
+    std::string m_cnp;
+    std::string m_data_angajare;
+    double m_salariu;
+    Tip_Angajat m_tip;
+    bool m_este_activ;
+    int m_ore_lucrate_luna;
+    std::vector<std::string> m_ture_lucrate;
 
 public:
     // Constructori
     Angajat();
     Angajat(int id, const std::string& nume, const std::string& prenume,
-        const std::string& cnp, const std::string& dataAngajare,
-        double salariu, TipAngajat tip);
+        const std::string& cnp, const std::string& data_angajare,
+        double salariu, Tip_Angajat tip);
     Angajat(const Angajat& other);
 
     // Destructor
     ~Angajat();
 
     // Getteri
-    int getId() const;
-    std::string getNume() const;
-    std::string getPrenume() const;
-    std::string getCnp() const;
-    std::string getDataAngajare() const;
-    double getSalariu() const;
-    TipAngajat getTip() const;
-    bool getEsteActiv() const;
-    int getOreLucrateLuna() const;
-    std::vector<std::string> getTureLucrate() const;
+    int GetId() const;
+    std::string GetNume() const;
+    std::string GetPrenume() const;
+    std::string GetCnp() const;
+    std::string GetDataAngajare() const;
+    double GetSalariu() const;
+    Tip_Angajat GetTip() const;
+    bool GetEsteActiv() const;
+    int GetOreLucrateLuna() const;
+    std::vector<std::string> GetTureLucrate() const;
 
     // Setteri
-    void setId(int id);
-    void setNume(const std::string& nume);
-    void setPrenume(const std::string& prenume);
-    void setCnp(const std::string& cnp);
-    void setDataAngajare(const std::string& dataAngajare);
-    void setSalariu(double salariu);
-    void setTip(TipAngajat tip);
-    void setEsteActiv(bool esteActiv);
+    void SetId(int id);
+    void SetNume(const std::string& nume);
+    void SetPrenume(const std::string& prenume);
+    void SetCnp(const std::string& cnp);
+    void SetDataAngajare(const std::string& data_angajare);
+    void SetSalariu(double salariu);
+    void SetTip(Tip_Angajat tip);
+    void SetEsteActiv(bool este_activ);
 
     // Alte metode
-    void adaugaTura(const std::string& data, int oraInceput, int oraFinal);
-    void stergeTura(const std::string& turaCod);
-    void calculeazaOreLucrateLuna(const std::string& luna); 
-    double calculeazaSalariuLunar(const std::string& luna) const;
-    void afisare() const;
-    std::string getTipAngajatString() const;
-    bool poateEliberaReteta() const;
+    void AdaugaTura(const std::string& data, int ora_inceput, int ora_final);
+    void StergeTura(const std::string& tura_cod);
+    void CalculeazaOreLucrateLuna(const std::string& luna);
+    double CalculeazaSalariuLunar(const std::string& luna) const;
+    void Afisare() const;
+    std::string GetTipAngajatString() const;
+    bool PoateEliberaReteta() const;
 
     // Supraincarcare operatori
     Angajat& operator=(const Angajat& other);

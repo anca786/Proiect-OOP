@@ -1,5 +1,5 @@
 #pragma once
-// Vanzabil.h
+// vanzabil.h
 #ifndef VANZABIL_H
 #define VANZABIL_H
 
@@ -9,17 +9,17 @@
 class Vanzabil {
 public:
     // Metode virtuale pure
-    virtual std::string getNume() const = 0;
-    virtual double getPret() const = 0;
-    virtual int getCantitate() const = 0;
-    virtual void scadeCantitate(int cantitate) = 0;
-    virtual void adaugaCantitate(int cantitate) = 0;
-    virtual bool esteDisponibil(int cantitateSolicitata) const = 0;
-    virtual void afisare() const = 0;
+    virtual std::string GetNume() const = 0;
+    virtual double GetPret() const = 0;
+    virtual int GetCantitate() const = 0;
+    virtual void ScadeCantitate(int cantitate) = 0;
+    virtual void AdaugaCantitate(int cantitate) = 0;
+    virtual bool EsteDisponibil(int cantitate_solicitata) const = 0;
+    virtual void Afisare() const = 0;
 
     //Destructor virtual
     virtual ~Vanzabil() = default;
 
 };
 
-#endif 
+#endif

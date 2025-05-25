@@ -1,32 +1,32 @@
 #pragma once
-// Analgezic.h
+// analgezic.h
 #ifndef ANALGEZIC_H
 #define ANALGEZIC_H
 
-#include "Medicament.h"
+#include "medicament.h"
 #include <string>
 
 class Analgezic : public Medicament {
 private:
-    std::string tip_durere;
+    std::string m_tip_durere;
 
 public:
     // Constructori
-    Analgezic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesitaReteta,
+    Analgezic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesita_reteta,
         const std::string& tip_durere);
 
     // Destructor
     ~Analgezic() override;
 
     // Getter
-    std::string getTipDurere() const;
+    std::string GetTipDurere() const;
 
     // Setter
-    void setTipDurere(const std::string& tip);
+    void SetTipDurere(const std::string& tip);
 
     // Alte metode
-    void afisare() const override;
-    Medicament* clone() const override;
+    void Afisare() const override;
+    Medicament* Clone() const override;
 
     // Supraincarcare operatori
     bool operator==(const Analgezic& other) const;

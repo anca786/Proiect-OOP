@@ -1,33 +1,33 @@
-﻿// Analgezic.cpp
-#include "Analgezic.h"
+﻿// analgezic.cpp
+#include "analgezic.h"
 #include <iostream>
 
 // Constructori
-Analgezic::Analgezic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesitaReteta,
+Analgezic::Analgezic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesita_reteta,
     const std::string& tip_durere)
-    : Medicament(id, nume, producator, pret, cantitate, necesitaReteta), tip_durere(tip_durere) {
+    : Medicament(id, nume, producator, pret, cantitate, necesita_reteta), m_tip_durere(tip_durere) {
 }
 
 // Destructor
 Analgezic::~Analgezic() = default;
 
 // Getter
-std::string Analgezic::getTipDurere() const { return tip_durere; }
+std::string Analgezic::GetTipDurere() const { return m_tip_durere; }
 
 // Setter
-void Analgezic::setTipDurere(const std::string& tip) { tip_durere = tip; }
+void Analgezic::SetTipDurere(const std::string& tip) { m_tip_durere = tip; }
 
 // Alte metode
-void Analgezic::afisare() const {
-    Medicament::afisare();
-    std::cout << " - Analgezic pentru: " << tip_durere << std::endl;
+void Analgezic::Afisare() const {
+    Medicament::Afisare();
+    std::cout << " - Analgezic pentru: " << m_tip_durere << std::endl;
 }
 
-Medicament* Analgezic::clone() const {
-    return new Analgezic(*this); 
+Medicament* Analgezic::Clone() const {
+    return new Analgezic(*this);
 }
 
 // Supraincarcare operatori
 bool Analgezic::operator==(const Analgezic& other) const {
-    return Medicament::operator==(other) && tip_durere == other.tip_durere;
+    return Medicament::operator==(other) && m_tip_durere == other.m_tip_durere;
 }

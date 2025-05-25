@@ -1,55 +1,55 @@
-// Medicament.h
+// medicament.h
 #ifndef MEDICAMENT_H
 #define MEDICAMENT_H
 
 #include <string>
-#include "Vanzabil.h"
+#include "vanzabil.h"
 
 class Medicament : public Vanzabil {
 private:
-    int id;
-    std::string nume;
-    std::string producator;
-    double pret;
-    int cantitate;
-    bool necesitaReteta;
-    static int totalMedicamenteCreate;
-    //int tip;
+    int m_id;
+    std::string m_nume;
+    std::string m_producator;
+    double m_pret;
+    int m_cantitate;
+    bool m_necesita_reteta;
+    static int m_total_medicamente_create;
+    //int m_tip;
 
 public:
 
     // Constructori
     Medicament();
     Medicament(int id, const std::string& nume, const std::string& producator,
-        double pret, int cantitate, bool necesitaReteta);
-    Medicament(const Medicament& other); 
+        double pret, int cantitate, bool necesita_reteta);
+    Medicament(const Medicament& other);
 
     // Destructor
     virtual ~Medicament() override;
 
     // Getteri
-    int getId() const;
-    std::string getNume() const override;
-    std::string getProducator() const ;
-    double getPret() const override;
-    int getCantitate() const override;
-    bool getNecesitaReteta() const;
-    static int getTotalMedicamenteCreate();
+    int GetId() const;
+    std::string GetNume() const override;
+    std::string GetProducator() const;
+    double GetPret() const override;
+    int GetCantitate() const override;
+    bool GetNecesitaReteta() const;
+    static int GetTotalMedicamenteCreate();
 
     // Setteri
-    void setId(int id);
-    void setNume(const std::string& nume);
-    void setProducator(const std::string& producator);
-    void setPret(double pret);
-    void setCantitate(int cantitate);
-    void setNecesitaReteta(bool necesitaReteta);
+    void SetId(int id);
+    void SetNume(const std::string& nume);
+    void SetProducator(const std::string& producator);
+    void SetPret(double pret);
+    void SetCantitate(int cantitate);
+    void SetNecesitaReteta(bool necesita_reteta);
 
     // Alte metode
-    virtual void afisare() const override;
-    virtual Medicament* clone() const = 0;
-    void adaugaCantitate(int cantitate) override; 
-    void scadeCantitate(int cantitate) override;
-    bool esteDisponibil(int cantitateSolicitata) const override;
+    virtual void Afisare() const override;
+    virtual Medicament* Clone() const = 0;
+    void AdaugaCantitate(int cantitate) override;
+    void ScadeCantitate(int cantitate) override;
+    bool EsteDisponibil(int cantitate_solicitata) const override;
 
 
     // Supraincarcare operatori
@@ -58,4 +58,4 @@ public:
     bool operator<(const Medicament& other) const;
 };
 
-#endif 
+#endif

@@ -127,30 +127,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Analgezic.cpp" />
-    <ClCompile Include="Angajat.cpp" />
-    <ClCompile Include="Antibiotic.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="ItemVanzare.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Medicament.cpp" />
-    <ClCompile Include="Farmacie.cpp" />
-    <ClCompile Include="Probiotic.cpp" />
-    <ClCompile Include="Sirop.cpp" />
-    <ClCompile Include="Vanzare.cpp" />
+    <ClCompile Include="analgezic.cpp" />
+    <ClCompile Include="angajat.cpp" />
+    <ClCompile Include="antibiotic.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="item_vanzare.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="medicament.cpp" />
+    <ClCompile Include="farmacie.cpp" />
+    <ClCompile Include="probiotic.cpp" />
+    <ClCompile Include="sirop.cpp" />
+    <ClCompile Include="vanzare.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Analgezic.h" />
-    <ClInclude Include="Angajat.h" />
-    <ClInclude Include="Antibiotic.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="ItemVanzare.h" />
-    <ClInclude Include="Medicament.h" />
-    <ClInclude Include="Farmacie.h" />
-    <ClInclude Include="Probiotic.h" />
-    <ClInclude Include="Sirop.h" />
-    <ClInclude Include="Vanzabil.h" />
-    <ClInclude Include="Vanzare.h" />
+    <ClInclude Include="analgezic.h" />
+    <ClInclude Include="angajat.h" />
+    <ClInclude Include="antibiotic.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="item_vanzare.h" />
+    <ClInclude Include="medicament.h" />
+    <ClInclude Include="farmacie.h" />
+    <ClInclude Include="probiotic.h" />
+    <ClInclude Include="sirop.h" />
+    <ClInclude Include="vanzabil.h" />
+    <ClInclude Include="vanzare.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

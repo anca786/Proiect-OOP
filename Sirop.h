@@ -1,32 +1,32 @@
 #pragma once
-// Sirop.h
+// sirop.h
 #ifndef SIROP_H
 #define SIROP_H
 
-#include "Medicament.h"
+#include "medicament.h"
 #include <string>
 
 class Sirop : public Medicament {
 private:
-    double volum;
+    double m_volum;
 
 public:
     // Constructori
-    Sirop(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesitaReteta,
+    Sirop(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesita_reteta,
         double volum);
 
     // Destructor
     ~Sirop() override;
 
     // Getter
-    double getVolum() const;
+    double GetVolum() const;
 
     // Setter
-    void setVolum(double volum);
+    void SetVolum(double volum);
 
     // Alte metode
-    void afisare() const override;
-    Medicament* clone() const override;
+    void Afisare() const override;
+    Medicament* Clone() const override;
 
     // Supraincarcare operatori
     bool operator==(const Sirop& other) const;

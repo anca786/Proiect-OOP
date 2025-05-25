@@ -1,4 +1,4 @@
-// Client.h
+// client.h
 #ifndef CLIENT_H
 #define CLIENT_H
 
@@ -6,39 +6,39 @@
 
 class Client {
 private:
-    int id;
-    std::string nume;
-    std::string prenume;
-    std::string cnp;
-    bool areAsigurare;
+    int m_id;
+    std::string m_nume;
+    std::string m_prenume;
+    std::string m_cnp;
+    bool m_are_asigurare;
 
 public:
     // Constructori
     Client();
     Client(int id, const std::string& nume, const std::string& prenume,
-        const std::string& cnp, bool areAsigurare);
-    Client(const Client& other); 
+        const std::string& cnp, bool are_asigurare);
+    Client(const Client& other);
 
     // Destructor
     ~Client();
 
     // Getteri
-    int getId() const;
-    std::string getNume() const;
-    std::string getPrenume() const;
-    std::string getCnp() const;
-    bool getAreAsigurare() const;
+    int GetId() const;
+    std::string GetNume() const;
+    std::string GetPrenume() const;
+    std::string GetCnp() const;
+    bool GetAreAsigurare() const;
 
     // Setteri
-    void setId(int id);
-    void setNume(const std::string& nume);
-    void setPrenume(const std::string& prenume);
-    void setCnp(const std::string& cnp);
-    void setAreAsigurare(bool areAsigurare);
+    void SetId(int id);
+    void SetNume(const std::string& nume);
+    void SetPrenume(const std::string& prenume);
+    void SetCnp(const std::string& cnp);
+    void SetAreAsigurare(bool are_asigurare);
 
     // Alte metode
-    void afisare() const;
-    double calculeazaDiscount() const;
+    void Afisare() const;
+    double CalculeazaDiscount() const;
 
     // Supraincarcare operatori
     Client& operator=(const Client& other);

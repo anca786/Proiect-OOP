@@ -1,33 +1,33 @@
-﻿// Probiotic.cpp
-#include "Probiotic.h"
+﻿// probiotic.cpp
+#include "probiotic.h"
 #include <iostream>
 
 // Constructori
-Probiotic::Probiotic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesitaReteta,
+Probiotic::Probiotic(int id, const std::string& nume, const std::string& producator, double pret, int cantitate, bool necesita_reteta,
     bool refrigerare_necesara)
-    : Medicament(id, nume, producator, pret, cantitate, necesitaReteta), refrigerare_necesara(refrigerare_necesara) {
+    : Medicament(id, nume, producator, pret, cantitate, necesita_reteta), m_refrigerare_necesara(refrigerare_necesara) {
 }
 
 // Destructor
 Probiotic::~Probiotic() = default;
 
 // Getter
-bool Probiotic::getRefrigerareNecesara() const { return refrigerare_necesara; }
+bool Probiotic::GetRefrigerareNecesara() const { return m_refrigerare_necesara; }
 
 // Setter
-void Probiotic::setRefrigerareNecesara(bool refrigerare) { refrigerare_necesara = refrigerare; }
+void Probiotic::SetRefrigerareNecesara(bool refrigerare) { m_refrigerare_necesara = refrigerare; }
 
 // Alte metode
-void Probiotic::afisare() const {
-    Medicament::afisare();
-    std::cout << " - Probiotic: " << (refrigerare_necesara ? "Necesita refrigerare" : "Nu necesita refrigerare") << std::endl;
+void Probiotic::Afisare() const {
+    Medicament::Afisare();
+    std::cout << " - Probiotic: " << (m_refrigerare_necesara ? "Necesita refrigerare" : "Nu necesita refrigerare") << std::endl;
 }
 
-Medicament* Probiotic::clone() const {
-    return new Probiotic(*this); 
+Medicament* Probiotic::Clone() const {
+    return new Probiotic(*this);
 }
 
 // Supraincarcare operatori
 bool Probiotic::operator==(const Probiotic& other) const {
-    return Medicament::operator==(other) && refrigerare_necesara == other.refrigerare_necesara;
+    return Medicament::operator==(other) && m_refrigerare_necesara == other.m_refrigerare_necesara;
 }

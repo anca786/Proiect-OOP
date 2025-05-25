@@ -1,192 +1,192 @@
-﻿// Angajat.cpp
-#include "Angajat.h"
+﻿// angajat.cpp
+#include "angajat.h"
 #include <iostream>
 #include <algorithm>
 #include <sstream>
 
 // Constructori
 Angajat::Angajat()
-    : id(0), nume(""), prenume(""), cnp(""), dataAngajare(""),
-    salariu(0.0), tip(TipAngajat::CASIER), esteActiv(true), oreLucrateLuna(0) {
+    : m_id(0), m_nume(""), m_prenume(""), m_cnp(""), m_data_angajare(""),
+    m_salariu(0.0), m_tip(Tip_Angajat::CASIER), m_este_activ(true), m_ore_lucrate_luna(0) {
 }
 
 Angajat::Angajat(int id, const std::string& nume, const std::string& prenume,
-    const std::string& cnp, const std::string& dataAngajare,
-    double salariu, TipAngajat tip)
-    : id(id), nume(nume), prenume(prenume), cnp(cnp), dataAngajare(dataAngajare),
-    salariu(salariu), tip(tip), esteActiv(true), oreLucrateLuna(0) {
+    const std::string& cnp, const std::string& data_angajare,
+    double salariu, Tip_Angajat tip)
+    : m_id(id), m_nume(nume), m_prenume(prenume), m_cnp(cnp), m_data_angajare(data_angajare),
+    m_salariu(salariu), m_tip(tip), m_este_activ(true), m_ore_lucrate_luna(0) {
 }
 
 Angajat::Angajat(const Angajat& other)
-    : id(other.id), nume(other.nume), prenume(other.prenume), cnp(other.cnp),
-    dataAngajare(other.dataAngajare), salariu(other.salariu), tip(other.tip),
-    esteActiv(other.esteActiv), oreLucrateLuna(other.oreLucrateLuna),
-    tureLucrate(other.tureLucrate) {
+    : m_id(other.m_id), m_nume(other.m_nume), m_prenume(other.m_prenume), m_cnp(other.m_cnp),
+    m_data_angajare(other.m_data_angajare), m_salariu(other.m_salariu), m_tip(other.m_tip),
+    m_este_activ(other.m_este_activ), m_ore_lucrate_luna(other.m_ore_lucrate_luna),
+    m_ture_lucrate(other.m_ture_lucrate) {
 }
 
 // Destructor
 Angajat::~Angajat() {}
 
 // Getteri
-int Angajat::getId() const { return id; }
-std::string Angajat::getNume() const { return nume; }
-std::string Angajat::getPrenume() const { return prenume; }
-std::string Angajat::getCnp() const { return cnp; }
-std::string Angajat::getDataAngajare() const { return dataAngajare; }
-double Angajat::getSalariu() const { return salariu; }
-TipAngajat Angajat::getTip() const { return tip; }
-bool Angajat::getEsteActiv() const { return esteActiv; }
-int Angajat::getOreLucrateLuna() const { return oreLucrateLuna; }
-std::vector<std::string> Angajat::getTureLucrate() const { return tureLucrate; }
+int Angajat::GetId() const { return m_id; }
+std::string Angajat::GetNume() const { return m_nume; }
+std::string Angajat::GetPrenume() const { return m_prenume; }
+std::string Angajat::GetCnp() const { return m_cnp; }
+std::string Angajat::GetDataAngajare() const { return m_data_angajare; }
+double Angajat::GetSalariu() const { return m_salariu; }
+Tip_Angajat Angajat::GetTip() const { return m_tip; }
+bool Angajat::GetEsteActiv() const { return m_este_activ; }
+int Angajat::GetOreLucrateLuna() const { return m_ore_lucrate_luna; }
+std::vector<std::string> Angajat::GetTureLucrate() const { return m_ture_lucrate; }
 
 // Setteri
-void Angajat::setId(int id) { this->id = id; }
-void Angajat::setNume(const std::string& nume) { this->nume = nume; }
-void Angajat::setPrenume(const std::string& prenume) { this->prenume = prenume; }
-void Angajat::setCnp(const std::string& cnp) { this->cnp = cnp; }
-void Angajat::setDataAngajare(const std::string& dataAngajare) { this->dataAngajare = dataAngajare; }
-void Angajat::setSalariu(double salariu) { this->salariu = salariu; }
-void Angajat::setTip(TipAngajat tip) { this->tip = tip; }
-void Angajat::setEsteActiv(bool esteActiv) { this->esteActiv = esteActiv; }
+void Angajat::SetId(int id) { this->m_id = id; }
+void Angajat::SetNume(const std::string& nume) { this->m_nume = nume; }
+void Angajat::SetPrenume(const std::string& prenume) { this->m_prenume = prenume; }
+void Angajat::SetCnp(const std::string& cnp) { this->m_cnp = cnp; }
+void Angajat::SetDataAngajare(const std::string& data_angajare) { this->m_data_angajare = data_angajare; }
+void Angajat::SetSalariu(double salariu) { this->m_salariu = salariu; }
+void Angajat::SetTip(Tip_Angajat tip) { this->m_tip = tip; }
+void Angajat::SetEsteActiv(bool este_activ) { this->m_este_activ = este_activ; }
 
 // Alte metode
-void Angajat::adaugaTura(const std::string& data, int oraInceput, int oraFinal) {
-    if (oraInceput < 0 || oraInceput > 23 || oraFinal < 0 || oraFinal > 23 || oraInceput >= oraFinal) {
+void Angajat::AdaugaTura(const std::string& data, int ora_inceput, int ora_final) {
+    if (ora_inceput < 0 || ora_inceput > 23 || ora_final < 0 || ora_final > 23 || ora_inceput >= ora_final) {
         std::cout << "Intervalul orar este invalid!" << std::endl;
         return;
     }
 
-    std::string turaCod = data + ":" + std::to_string(oraInceput) + "-" + std::to_string(oraFinal);
+    std::string tura_cod = data + ":" + std::to_string(ora_inceput) + "-" + std::to_string(ora_final);
 
-    auto it = std::find(tureLucrate.begin(), tureLucrate.end(), turaCod);
-    if (it != tureLucrate.end()) {
+    auto it = std::find(m_ture_lucrate.begin(), m_ture_lucrate.end(), tura_cod);
+    if (it != m_ture_lucrate.end()) {
         std::cout << "Această tură există deja în program!" << std::endl;
         return;
     }
 
-    tureLucrate.push_back(turaCod);
+    m_ture_lucrate.push_back(tura_cod);
     std::cout << "Tură adăugată cu succes!" << std::endl;
 }
 
-void Angajat::stergeTura(const std::string& turaCod) {
-    auto it = std::find(tureLucrate.begin(), tureLucrate.end(), turaCod);
-    if (it != tureLucrate.end()) {
-        tureLucrate.erase(it);
-        std::cout <<"Tură ștearsă cu succes!" << std::endl;
+void Angajat::StergeTura(const std::string& tura_cod) {
+    auto it = std::find(m_ture_lucrate.begin(), m_ture_lucrate.end(), tura_cod);
+    if (it != m_ture_lucrate.end()) {
+        m_ture_lucrate.erase(it);
+        std::cout << "Tură ștearsă cu succes!" << std::endl;
     }
     else {
         std::cout << "Această tură nu există în program!" << std::endl;
     }
 }
 
-void Angajat::calculeazaOreLucrateLuna(const std::string& luna) {
-    oreLucrateLuna = 0;
+void Angajat::CalculeazaOreLucrateLuna(const std::string& luna) {
+    m_ore_lucrate_luna = 0;
 
-    for (const auto& tura : tureLucrate) {
+    for (const auto& tura : m_ture_lucrate) {
         if (tura.substr(0, 7) == luna) {
             size_t pos1 = tura.find(":");
             size_t pos2 = tura.find("-", pos1);
 
             if (pos1 != std::string::npos && pos2 != std::string::npos) {
-                int oraInceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));
-                int oraFinal = std::stoi(tura.substr(pos2 + 1));
+                int ora_inceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));
+                int ora_final = std::stoi(tura.substr(pos2 + 1));
 
-                oreLucrateLuna += (oraFinal - oraInceput);
+                m_ore_lucrate_luna += (ora_final - ora_inceput);
             }
         }
     }
 }
 
-double Angajat::calculeazaSalariuLunar(const std::string& luna) const {
-    int oreLucrate = 0;
+double Angajat::CalculeazaSalariuLunar(const std::string& luna) const {
+    int ore_lucrate = 0;
 
-    for (const auto& tura : tureLucrate) {
+    for (const auto& tura : m_ture_lucrate) {
         if (tura.substr(0, 7) == luna) {
             size_t pos1 = tura.find(":");
             size_t pos2 = tura.find("-", pos1);
 
             if (pos1 != std::string::npos && pos2 != std::string::npos) {
-                int oraInceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));
-                int oraFinal = std::stoi(tura.substr(pos2 + 1));
+                int ora_inceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));
+                int ora_final = std::stoi(tura.substr(pos2 + 1));
 
-                oreLucrate += (oraFinal - oraInceput);
+                ore_lucrate += (ora_final - ora_inceput);
             }
         }
     }
 
-    const int oreStandard = 160;
-    double salariuLunar = salariu;
+    const int ore_standard = 160;
+    double salariu_lunar = m_salariu;
 
-    if (oreLucrate > oreStandard) {
-        double tarifOrar = salariu / oreStandard;
-        salariuLunar += (oreLucrate - oreStandard) * tarifOrar * 1.5;
+    if (ore_lucrate > ore_standard) {
+        double tarif_orar = m_salariu / ore_standard;
+        salariu_lunar += (ore_lucrate - ore_standard) * tarif_orar * 1.5;
     }
 
-    return salariuLunar;
+    return salariu_lunar;
 }
 
-std::string Angajat::getTipAngajatString() const {
-    switch (tip) {
-    case TipAngajat::FARMACIST:
+std::string Angajat::GetTipAngajatString() const {
+    switch (m_tip) {
+    case Tip_Angajat::FARMACIST:
         return "Farmacist";
-    case TipAngajat::ASISTENT_FARMACIST:
+    case Tip_Angajat::ASISTENT_FARMACIST:
         return "Asistent farmacist";
-    case TipAngajat::CASIER:
+    case Tip_Angajat::CASIER:
         return "Casier";
-    case TipAngajat::MANAGER:
+    case Tip_Angajat::MANAGER:
         return "Manager";
-    case TipAngajat::ADMINISTRATOR:
+    case Tip_Angajat::ADMINISTRATOR:
         return "Administrator";
     default:
         return "Necunoscut";
     }
 }
 
-bool Angajat::poateEliberaReteta() const {
-    return tip == TipAngajat::FARMACIST || tip == TipAngajat::ASISTENT_FARMACIST;
+bool Angajat::PoateEliberaReteta() const {
+    return m_tip == Tip_Angajat::FARMACIST || m_tip == Tip_Angajat::ASISTENT_FARMACIST;
 }
 
-void Angajat::afisare() const {
-    std::cout << "ID: " << id << std::endl;
-    std::cout << "Nume: " << nume << " " << prenume << std::endl;
-    std::cout << "CNP: " << cnp << std::endl;
-    std::cout << "Data angajare: " << dataAngajare << std::endl;
-    std::cout << "Salariu: " << salariu << " RON" << std::endl;
-    std::cout << "Tip angajat: " << getTipAngajatString() << std::endl;
-    std::cout << "Status: " << (esteActiv ? "Activ" : "Inactiv") << std::endl;
-    std::cout << "Ore lucrate luna curentă: " << oreLucrateLuna << std::endl;
+void Angajat::Afisare() const {
+    std::cout << "ID: " << m_id << std::endl;
+    std::cout << "Nume: " << m_nume << " " << m_prenume << std::endl;
+    std::cout << "CNP: " << m_cnp << std::endl;
+    std::cout << "Data angajare: " << m_data_angajare << std::endl;
+    std::cout << "Salariu: " << m_salariu << " RON" << std::endl;
+    std::cout << "Tip angajat: " << GetTipAngajatString() << std::endl;
+    std::cout << "Status: " << (m_este_activ ? "Activ" : "Inactiv") << std::endl;
+    std::cout << "Ore lucrate luna curentă: " << m_ore_lucrate_luna << std::endl;
 }
 
 // Supraincarcare operatori
 Angajat& Angajat::operator=(const Angajat& other) {
     if (this != &other) {
-        id = other.id;
-        nume = other.nume;
-        prenume = other.prenume;
-        cnp = other.cnp;
-        dataAngajare = other.dataAngajare;
-        salariu = other.salariu;
-        tip = other.tip;
-        esteActiv = other.esteActiv;
-        oreLucrateLuna = other.oreLucrateLuna;
-        tureLucrate = other.tureLucrate;
+        m_id = other.m_id;
+        m_nume = other.m_nume;
+        m_prenume = other.m_prenume;
+        m_cnp = other.m_cnp;
+        m_data_angajare = other.m_data_angajare;
+        m_salariu = other.m_salariu;
+        m_tip = other.m_tip;
+        m_este_activ = other.m_este_activ;
+        m_ore_lucrate_luna = other.m_ore_lucrate_luna;
+        m_ture_lucrate = other.m_ture_lucrate;
     }
     return *this;
 }
 
 bool Angajat::operator==(const Angajat& other) const {
-    return cnp == other.cnp;
+    return m_cnp == other.m_cnp;
 }
 
 std::ostream& operator<<(std::ostream& os, const Angajat& angajat)
 {
-    os << "ID: " << angajat.getId() << "\n";
-    os << "Nume: " << angajat.getNume() << " " << angajat.getPrenume() << "\n";
-    os << "CNP: " << angajat.getCnp() << "\n";
-    os << "Data angajare: " << angajat.getDataAngajare() << "\n";
-    os << "Salariu: " << angajat.getSalariu() << " RON\n";
-    os << "Tip angajat: " << angajat.getTipAngajatString() << "\n";
-    os << "Status: " << (angajat.getEsteActiv() ? "Activ" : "Inactiv") << "\n";
-    os << "Ore lucrate luna curentă: " << angajat.getOreLucrateLuna() << "\n";
+    os << "ID: " << angajat.GetId() << "\n";
+    os << "Nume: " << angajat.GetNume() << " " << angajat.GetPrenume() << "\n";
+    os << "CNP: " << angajat.GetCnp() << "\n";
+    os << "Data angajare: " << angajat.GetDataAngajare() << "\n";
+    os << "Salariu: " << angajat.GetSalariu() << " RON\n";
+    os << "Tip angajat: " << angajat.GetTipAngajatString() << "\n";
+    os << "Status: " << (angajat.GetEsteActiv() ? "Activ" : "Inactiv") << "\n";
+    os << "Ore lucrate luna curentă: " << angajat.GetOreLucrateLuna() << "\n";
     return os;
 }
