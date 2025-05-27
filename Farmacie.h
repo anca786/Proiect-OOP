@@ -10,12 +10,11 @@
 #include <vector>
 #include <string>
 
-struct Adresa {
+struct Adresa {            //am folosit struct pentru ca adresa e o colectie simpla de date
     std::string strada;
     int numar;
     std::string oras;
     int cod_postal;
-
     Adresa() : strada(""), numar(0), oras(""), cod_postal(0) {}
     Adresa(const std::string& str, const int& nr, const std::string& oras, const int& cp)
         : strada(str), numar(nr), oras(oras), cod_postal(cp) {

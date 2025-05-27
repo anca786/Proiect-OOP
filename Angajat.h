@@ -7,7 +7,7 @@
 #include <vector>
 #include<iostream>
 
-enum class Tip_Angajat {
+enum class Tip_Angajat {     //l-am folosit pentru claritate,ca sa se inteleaga sau cunoasca mai bine tipurile de angajati
     FARMACIST,
     ASISTENT_FARMACIST,
     CASIER,

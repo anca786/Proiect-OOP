@@ -20,10 +20,10 @@ void Sirop::SetVolum(double volum) { this->m_volum = volum; }
 // Alte metode
 void Sirop::Afisare() const {
     Medicament::Afisare();
-    std::cout << " - Sirop: Volum " << m_volum << "ml" << std::endl;
+	std::cout << " - Sirop: Volum " << m_volum << "ml" << std::endl;         // afiseaza volumul siropului
 }
 
-Medicament* Sirop::Clone() const {
+Medicament* Sirop::Clone() const {        //creeaza o copie a obiectului Sirop
     return new Sirop(*this);
 }
 

@@ -15,6 +15,9 @@ private:
     std::vector<ItemVanzare> m_items;
     double m_total_vanzare;
     double m_discount;
+	void _CalculeazaTotalHelper();   // Metoda privata pentru calcularea totalului vanzarii
+	void _AplicaDiscountHelper();    // Metoda privata pentru aplicarea discountului
+
 
 public:
     // Constructori
@@ -51,10 +54,6 @@ public:
     bool operator==(const Vanzare& other) const;
     Vanzare& operator+(const ItemVanzare& item);
 
-private:
-    // Metode private
-    void _CalculeazaTotalHelper();
-    void _AplicaDiscountHelper();
 };
 
 #endif

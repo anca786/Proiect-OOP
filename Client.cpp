@@ -40,7 +40,7 @@ void Client::Afisare() const {
     std::cout << "Are asigurare: " << (m_are_asigurare ? "Da" : "Nu") << std::endl;
 }
 
-double Client::CalculeazaDiscount() const {
+double Client::CalculeazaDiscount() const {     //daca un client are asigurare,atunci va avea un discount de 50%
     if (m_are_asigurare) {
         return 0.5;
     }

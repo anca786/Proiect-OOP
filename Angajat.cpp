@@ -10,7 +10,7 @@ Angajat::Angajat()
     m_salariu(0.0), m_tip(Tip_Angajat::CASIER), m_este_activ(true), m_ore_lucrate_luna(0) {
 }
 
-Angajat::Angajat(int id, const std::string& nume, const std::string& prenume,
+Angajat::Angajat(int id, const std::string& nume, const std::string& prenume, 
     const std::string& cnp, const std::string& data_angajare,
     double salariu, Tip_Angajat tip)
     : m_id(id), m_nume(nume), m_prenume(prenume), m_cnp(cnp), m_data_angajare(data_angajare),
@@ -50,15 +50,16 @@ void Angajat::SetTip(Tip_Angajat tip) { this->m_tip = tip; }
 void Angajat::SetEsteActiv(bool este_activ) { this->m_este_activ = este_activ; }
 
 // Alte metode
-void Angajat::AdaugaTura(const std::string& data, int ora_inceput, int ora_final) {
+void Angajat::AdaugaTura(const std::string& data, int ora_inceput, int ora_final) {       // Adauga o tura lucrata
     if (ora_inceput < 0 || ora_inceput > 23 || ora_final < 0 || ora_final > 23 || ora_inceput >= ora_final) {
         std::cout << "Intervalul orar este invalid!" << std::endl;
         return;
     }
 
-    std::string tura_cod = data + ":" + std::to_string(ora_inceput) + "-" + std::to_string(ora_final);
+    std::string tura_cod = data + ":" + std::to_string(ora_inceput) + "-" + std::to_string(ora_final);    //modul in care este salvata o tura YYYY-MM-DD:HH-HH
 
-    auto it = std::find(m_ture_lucrate.begin(), m_ture_lucrate.end(), tura_cod);
+
+    auto it = std::find(m_ture_lucrate.begin(), m_ture_lucrate.end(), tura_cod);  // Cauta daca tura exista deja,iar daca nu exista o adauga
     if (it != m_ture_lucrate.end()) {
         std::cout << "Această tură există deja în program!" << std::endl;
         return;
@@ -68,7 +69,7 @@ void Angajat::AdaugaTura(const std::string& data, int ora_inceput, int ora_final
     std::cout << "Tură adăugată cu succes!" << std::endl;
 }
 
-void Angajat::StergeTura(const std::string& tura_cod) {
+void Angajat::StergeTura(const std::string& tura_cod) {   //Sterge o tura existenta
     auto it = std::find(m_ture_lucrate.begin(), m_ture_lucrate.end(), tura_cod);
     if (it != m_ture_lucrate.end()) {
         m_ture_lucrate.erase(it);
@@ -79,16 +80,16 @@ void Angajat::StergeTura(const std::string& tura_cod) {
     }
 }
 
-void Angajat::CalculeazaOreLucrateLuna(const std::string& luna) {
+void Angajat::CalculeazaOreLucrateLuna(const std::string& luna) {   //Calculeaza orele lucrrate intr-o anumita luna
     m_ore_lucrate_luna = 0;
 
     for (const auto& tura : m_ture_lucrate) {
-        if (tura.substr(0, 7) == luna) {
-            size_t pos1 = tura.find(":");
-            size_t pos2 = tura.find("-", pos1);
+        if (tura.substr(0, 7) == luna) {    //verifica daca tura se incadreaza in luna specificate
+            size_t pos1 = tura.find(":");          //cauta ora la care incepe tura
+            size_t pos2 = tura.find("-", pos1);     //cauta ora la care se termina tura
 
             if (pos1 != std::string::npos && pos2 != std::string::npos) {
-                int ora_inceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));
+                int ora_inceput = std::stoi(tura.substr(pos1 + 1, pos2 - pos1 - 1));   //extrage ora de inceput,respectiv de final
                 int ora_final = std::stoi(tura.substr(pos2 + 1));
 
                 m_ore_lucrate_luna += (ora_final - ora_inceput);
@@ -100,7 +101,7 @@ void Angajat::CalculeazaOreLucrateLuna(const std::string& luna) {
 double Angajat::CalculeazaSalariuLunar(const std::string& luna) const {
     int ore_lucrate = 0;
 
-    for (const auto& tura : m_ture_lucrate) {
+    for (const auto& tura : m_ture_lucrate) {           //calculeaza cate ore a lucrat un angajat intr-o anumita luna ca mai sus
         if (tura.substr(0, 7) == luna) {
             size_t pos1 = tura.find(":");
             size_t pos2 = tura.find("-", pos1);
@@ -115,17 +116,17 @@ double Angajat::CalculeazaSalariuLunar(const std::string& luna) const {
     }
 
     const int ore_standard = 160;
-    double salariu_lunar = m_salariu;
+    double salariu_lunar = m_salariu;            
 
-    if (ore_lucrate > ore_standard) {
-        double tarif_orar = m_salariu / ore_standard;
+    if (ore_lucrate > ore_standard) {               //calculeaza salariul in functie de cate ore a lucrat angajatul in acea luna
+        double tarif_orar = m_salariu / ore_standard; 
         salariu_lunar += (ore_lucrate - ore_standard) * tarif_orar * 1.5;
     }
 
     return salariu_lunar;
 }
 
-std::string Angajat::GetTipAngajatString() const {
+std::string Angajat::GetTipAngajatString() const {    //returneaza tipul angajatului 
     switch (m_tip) {
     case Tip_Angajat::FARMACIST:
         return "Farmacist";
@@ -142,9 +143,9 @@ std::string Angajat::GetTipAngajatString() const {
     }
 }
 
-bool Angajat::PoateEliberaReteta() const {
-    return m_tip == Tip_Angajat::FARMACIST || m_tip == Tip_Angajat::ASISTENT_FARMACIST;
-}
+/*bool Angajat::PoateEliberaReteta() const {
+	return m_tip == Tip_Angajat::FARMACIST || m_tip == Tip_Angajat::ASISTENT_FARMACIST;  //verifica daca angajatul poate elibera retete
+}*/
 
 void Angajat::Afisare() const {
     std::cout << "ID: " << m_id << std::endl;

@@ -4,15 +4,19 @@
 #include <iomanip>
 
 // Constructori
-Vanzare::Vanzare() : m_id(0), m_data(""), m_total_vanzare(0.0), m_discount(0.0) {}
+Vanzare::Vanzare() : m_id(0), m_data(""), m_total_vanzare(0.0){}
 
 Vanzare::Vanzare(int id, const std::string& data, const Client& client)
     : m_id(id), m_data(data), m_client(client), m_total_vanzare(0.0), m_discount(0.0) {
 }
 
 Vanzare::Vanzare(const Vanzare& other)
-    : m_id(other.m_id), m_data(other.m_data), m_client(other.m_client),
-    m_items(other.m_items), m_total_vanzare(other.m_total_vanzare), m_discount(other.m_discount) {
+    : m_id(other.m_id), 
+    m_data(other.m_data),
+    m_client(other.m_client),
+    m_items(other.m_items), 
+    m_total_vanzare(other.m_total_vanzare),
+    m_discount(other.m_discount) {
 }
 
 // Destructor
@@ -32,7 +36,7 @@ void Vanzare::SetData(const std::string& data) { this->m_data = data; }
 void Vanzare::SetClient(const Client& client) { this->m_client = client; }
 
 // Alte metode
-void Vanzare::AdaugaItem(const Medicament& medicament, int cantitate) {
+void Vanzare::AdaugaItem(const Medicament& medicament, int cantitate) {        // adauga un item la vanzare
     if (cantitate <= 0 || medicament.GetCantitate() < cantitate) {
         std::cout << "Cantitate invalida sau stoc insuficient!" << std::endl;
         return;
@@ -48,14 +52,14 @@ void Vanzare::AdaugaItem(const Medicament& medicament, int cantitate) {
     CalculeazaTotal();
 }
 
-void Vanzare::StergeItem(int index) {
+void Vanzare::StergeItem(int index) {            // sterge un item din vanzare
     if (index >= 0 && index < m_items.size()) {
         m_items.erase(m_items.begin() + index);
         CalculeazaTotal();
     }
 }
 
-void Vanzare::CalculeazaTotal() {
+void Vanzare::CalculeazaTotal() {         // calculeaza totalul vanzarii
     m_total_vanzare = 0.0;
     for (const auto& item : m_items) {
         m_total_vanzare += item.pret_total;
@@ -63,7 +67,7 @@ void Vanzare::CalculeazaTotal() {
     AplicaDiscount();
 }
 
-void Vanzare::AplicaDiscount() {
+void Vanzare::AplicaDiscount() {          //aplica discount la clientii care au asigurare
     double ratio_discount = m_client.CalculeazaDiscount();
     m_discount = m_total_vanzare * ratio_discount;
     m_total_vanzare -= m_discount;

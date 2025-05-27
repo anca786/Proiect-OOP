@@ -20,10 +20,10 @@ void Antibiotic::SetSubstantaActiva(const std::string& substanta) { m_substanta_
 // Alte metode
 void Antibiotic::Afisare() const {
 	Medicament::Afisare();
-	std::cout << " - Antibiotic: " << m_substanta_activa << ", " << m_concentratie << "mg" << std::endl;
+	std::cout << " - Antibiotic: " << m_substanta_activa << ", " << m_concentratie << "mg" << std::endl;   //afiseaza substanta activa si concentratia antibioticului
 }
 
-Medicament* Antibiotic::Clone() const {
+Medicament* Antibiotic::Clone() const {   //creeaza o copie a obiectului Antibiotic
 	return new Antibiotic(*this);
 }
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream> 
 
-class Vanzabil {
+class Vanzabil {       //clasa abstracta pentru toate produsele care pot fi vandute
 public:
     // Metode virtuale pure
     virtual std::string GetNume() const = 0;

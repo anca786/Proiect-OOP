@@ -14,7 +14,6 @@ private:
     int m_cantitate;
     bool m_necesita_reteta;
     static int m_total_medicamente_create;
-    //int m_tip;
 
 public:
 

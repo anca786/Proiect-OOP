@@ -18,12 +18,12 @@ bool Probiotic::GetRefrigerareNecesara() const { return m_refrigerare_necesara; 
 void Probiotic::SetRefrigerareNecesara(bool refrigerare) { m_refrigerare_necesara = refrigerare; }
 
 // Alte metode
-void Probiotic::Afisare() const {
+void Probiotic::Afisare() const {   
     Medicament::Afisare();
-    std::cout << " - Probiotic: " << (m_refrigerare_necesara ? "Necesita refrigerare" : "Nu necesita refrigerare") << std::endl;
+	std::cout << " - Probiotic: " << (m_refrigerare_necesara ? "Necesita refrigerare" : "Nu necesita refrigerare") << std::endl;   //afiseaza daca necesita refrigerare sau nu
 }
 
-Medicament* Probiotic::Clone() const {
+Medicament* Probiotic::Clone() const {   //creeaza o copie a obiectului Probiotic
     return new Probiotic(*this);
 }
 

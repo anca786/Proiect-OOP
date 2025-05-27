@@ -20,10 +20,10 @@ void Analgezic::SetTipDurere(const std::string& tip) { m_tip_durere = tip; }
 // Alte metode
 void Analgezic::Afisare() const {
     Medicament::Afisare();
-    std::cout << " - Analgezic pentru: " << m_tip_durere << std::endl;
+	std::cout << " - Analgezic pentru: " << m_tip_durere << std::endl; // Afiseaza tipul de durere pentru care este destinat analgezicul
 }
 
-Medicament* Analgezic::Clone() const {
+Medicament* Analgezic::Clone() const {  // Crează o copie a obiectului Analgezic
     return new Analgezic(*this);
 }
 
