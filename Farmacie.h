@@ -31,6 +31,7 @@ private:
     int m_next_id_medicament;
     int m_next_id_client;
     int m_next_id_vanzare;
+    int m_finalizata = false;
 
 public:
     // Constructori
@@ -66,8 +67,7 @@ public:
     // Metode pentru gestiunea clientilor
     void AdaugaClient(const std::string& nume, const std::string& prenume,
         const std::string& cnp, bool are_asigurare);
-    void ActualizeazaClient(int id, const std::string& nume, const std::string& prenume,
-        const std::string& cnp, bool are_asigurare);
+    void ActualizeazaClient(int id, const std::string& nume, const std::string& prenume, bool are_asigurare);
     void StergeClient(int id);
     Client* CautaClient(int id);
     Client* CautaClientDupaCnp(const std::string& cnp);

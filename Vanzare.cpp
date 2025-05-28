@@ -120,6 +120,7 @@ void Vanzare::GenereazaBon() const {
     std::cout << "==================================================" << std::endl;
 }
 
+
 // Metode private
 void Vanzare::_CalculeazaTotalHelper() {
     // Helper method pentru calcule complexe

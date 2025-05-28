@@ -44,6 +44,7 @@ int main()
 				std::cout << "7. Cauta medicament dupa id" << std::endl;
 				std::cout << "8. Cauta medicament dupa nume" << std::endl;
 				std::cout << "9. Actualizeaza medicament" << std::endl;
+				std::cout << "10.Actualizeaza stocul unui medicament" << std::endl;
 				std::cout << "0. Meniu principal" << std::endl;
 				std::cout << "Introduceti optiunea: ";
 				int optiune;
@@ -187,7 +188,6 @@ int main()
 					double pret;
 					int cantitate;
 					bool necesita_reteta = false;
-					//int tip;
 					std::cout << "Introduceti ID-ul medicamentului de actualizat: ";
 					std::cin >> id;
 					std::cout << "Introduceti noul nume al medicamentului: ";
@@ -205,6 +205,19 @@ int main()
 					std::cout << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
 					std::cin.get();
 
+				}
+				else if (optiune == 10)                  // actualizeaza stocul unui medicament existent
+				{
+					int id;
+					int cantitate;
+					std::cout << "Introduceti ID-ul medicamentului: ";
+					std::cin >> id;
+					std::cout << "Introduceti cantitatea de adaugat: ";
+					std::cin >> cantitate;
+					std::cin.ignore();
+					farmacie.ActualizeazaStoc(id, cantitate);
+					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
+					std::cin.get();
 				}
 			}
 		}
@@ -283,7 +296,7 @@ int main()
 				else if (optiune == 5)                          // actualizeaza un client existent
 				{
 					int id;
-					std::string nume, prenume, cnp;
+					std::string nume, prenume;
 					bool are_asigurare = false;
 					std::cout << "Introduceti ID-ul clientului de actualizat: ";
 					std::cin >> id;
@@ -291,12 +304,10 @@ int main()
 					std::cin >> nume;
 					std::cout << "Introduceti noul prenume al clientului: ";
 					std::cin >> prenume;
-					std::cout << "Introduceti noul CNP al clientului: ";
-					std::cin >> cnp;
 					std::cout << "Are asigurare? (1 - da, 0 - nu): ";
 					std::cin >> are_asigurare;
 					std::cin.ignore();
-					farmacie.ActualizeazaClient(id, nume, prenume, cnp, are_asigurare);
+					farmacie.ActualizeazaClient(id, nume, prenume,  are_asigurare);
 					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
 					std::cin.get();
 				}
@@ -387,7 +398,6 @@ int main()
 					std::cin >> id_vanzare;
 					std::cin.ignore();
 					farmacie.FinalizeazaVanzare(id_vanzare);
-					std::cout << "Vanzare finalizata cu succes.\n";
 					std::cout << std::endl << "Apasa ENTER pentru a te intoarce la meniu" << std::endl;
 					std::cin.get();
 				}

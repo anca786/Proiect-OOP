@@ -120,6 +120,18 @@ void Farmacie::AfisareMedicamente() const {                  // afiseaza toate m
 	}
 }
 
+void Farmacie::ActualizeazaStoc(int id, int cantitate)                         // actualizeaza cantitatea unui medicament in stoc
+{               
+	Medicament* med = CautaMedicament(id);
+	if (med) {
+		med->SetCantitate(med->GetCantitate() + cantitate);
+		std::cout << "Stocul medicamentului cu ID-ul " << id << " a fost actualizat cu succes!" << std::endl;
+	}
+	else {
+		std::cout << "Medicamentul cu ID-ul " << id << " nu a fost gasit!" << std::endl;
+	}
+}
+
 void Farmacie::AfisareAnalgezice() const {                          // afiseaza toate analgezicele din stoc
 	if (m_stoc_medicamente.empty()) {
 		std::cout << "Nu exista analgezice in stoc." << std::endl;
@@ -192,6 +204,11 @@ void Farmacie::AfisareSiropuri() const {                                 // afis
 // Metode pentru gestiunea clientilor
 void Farmacie::AdaugaClient(const std::string& nume, const std::string& prenume,               //adauga un client nou
 	const std::string& cnp, bool are_asigurare) {
+	if (cnp.size() != 13)
+	{
+		std::cout << " CNP-ul nu este valid!" << std::endl;
+		return;
+	}
 	auto it = std::find_if(m_clienti.begin(), m_clienti.end(),
 		[&cnp](const Client& c) { return c.GetCnp() == cnp; });
 
@@ -206,11 +223,11 @@ void Farmacie::AdaugaClient(const std::string& nume, const std::string& prenume,
 }
 
 void Farmacie::ActualizeazaClient(int id, const std::string& nume, const std::string& prenume,              //actualizeza datele despre un client
-	const std::string& cnp, bool are_asigurare) {
+	 bool are_asigurare) {
 	Client* client = CautaClient(id);
 	if (client) {
 		auto it = std::find_if(m_clienti.begin(), m_clienti.end(),
-			[&cnp, id](const Client& c) { return c.GetCnp() == cnp && c.GetId() != id; });
+			[id](const Client& c) { return c.GetId() != id; });
 
 		if (it != m_clienti.end()) {
 			std::cout << "Un alt client cu acest CNP exista deja!" << std::endl;
@@ -219,7 +236,6 @@ void Farmacie::ActualizeazaClient(int id, const std::string& nume, const std::st
 
 		client->SetNume(nume);
 		client->SetPrenume(prenume);
-		//client->SetCnp(cnp);
 		client->SetAreAsigurare(are_asigurare);
 		std::cout << "Client actualizat cu succes!" << std::endl;
 	}
@@ -271,6 +287,7 @@ Vanzare Farmacie::CreeazaVanzare(int id_client, const std::string& data) {      
 		Vanzare vanzare(m_next_id_vanzare++, data, *client);
 		m_vanzari.push_back(vanzare);
 		std::cout << "Vanzare noua creata cu ID: " << vanzare.GetId() << std::endl;
+		m_finalizata = false;
 		return vanzare;
 	}
 	else {
@@ -327,24 +344,30 @@ void Farmacie::AfisareVanzare(int id_vanzare) {                     // afiseaza 
 	}
 }
 void Farmacie::AdaugaItemLaVanzare(int id_vanzare, int id_medicament, int cantitate) {              // adauga un mediament la o vanzare existenta
-	Vanzare* vanzare = CautaVanzare(id_vanzare);
-	if (!vanzare) {
-		std::cout << "Eroare: Vanzarea cu ID-ul " << id_vanzare << " nu a fost gasita.\n";        //verifica daca vanzarea sau medicamentul exista
-		return;
-	}
-	Medicament* medicament = CautaMedicament(id_medicament);
-	if (vanzare && medicament) {
-
-		vanzare->AdaugaItem(*medicament, cantitate);
-	}
-	else {
+		if (m_finalizata == true)
+		{
+			std::cout << "Vanzarea cu ID-ul " << id_vanzare << " a fost deja finalizata!" << std::endl;        //verifica daca vanzarea este finalizata,in caz pozitiv,nu mai adauga niciun medicament
+			return;
+		}
+		Vanzare* vanzare = CautaVanzare(id_vanzare);
 		if (!vanzare) {
-			std::cout << "Vanzarea cu ID-ul " << id_vanzare << " nu a fost gasita!" << std::endl;
+			std::cout << "Eroare: Vanzarea cu ID-ul " << id_vanzare << " nu a fost gasita.\n";        //verifica daca vanzarea sau medicamentul exista
+			return;
 		}
-		if (!medicament) {
-			std::cout << "Medicamentul cu ID-ul " << id_medicament << " nu a fost gasit!" << std::endl;
+		Medicament* medicament = CautaMedicament(id_medicament);
+		if (vanzare && medicament) {
+
+			vanzare->AdaugaItem(*medicament, cantitate);
+			std::cout << "Medicamentul " << medicament->GetNume() << " a fost adaugat la vanzare cu succes!" << std::endl;        
 		}
-	}
+		else {
+			if (!vanzare) {
+				std::cout << "Vanzarea cu ID-ul " << id_vanzare << " nu a fost gasita!" << std::endl;
+			}
+			if (!medicament) {
+				std::cout << "Medicamentul cu ID-ul " << id_medicament << " nu a fost gasit!" << std::endl;
+			}
+		}
 }
 void Farmacie::StergeItemDinVanzare(int id_vanzare, int index_item) {                  // sterge un item dintr-o vanzare existenta
 	Vanzare* vanzare = CautaVanzare(id_vanzare);
@@ -359,15 +382,17 @@ void Farmacie::StergeItemDinVanzare(int id_vanzare, int index_item) {           
 
 void Farmacie::FinalizeazaVanzare(int id_vanzare) {              // finalizeaza o vanzare existenta si genereaza bonul pentru aceasta
 	Vanzare* vanzare = CautaVanzare(id_vanzare);
-	
 	if (vanzare) {
 		vanzare->GenereazaBon();
 		std::cout << "Vanzare finalizata cu succes!" << std::endl;
+		m_finalizata = true;
 	}
 	else {
 		std::cout << "Vanzarea cu ID-ul " << id_vanzare << " nu a fost gasita!" << std::endl;
 	}
 }
+
+
 
 void Farmacie::RaportStoc() const {             // afiseaza raportul stocului de medicamente
 	std::cout << "--- Raport stoc medicamente ---" << std::endl;
